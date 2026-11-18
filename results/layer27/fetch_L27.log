@@ -1,0 +1,8 @@
+L27: 1728 tensors, 5 contiguous runs, 6.75 GiB in 111 range requests
+  L27: 0.00/6.75 GiB, 0 MiB/s
+  L27: 2.41/6.75 GiB, 15 MiB/s
+  L27: 2.54/6.75 GiB, 16 MiB/s
+  L27: 3.73/6.75 GiB, 19 MiB/s
+  L27: 4.98/6.75 GiB, 20 MiB/s
+  L27: 6.22/6.75 GiB, 21 MiB/s
+L27: wrote layer_27_experts.safetensors (6.75 GiB) in 5.2 min (22 MiB/s); spot checks passed

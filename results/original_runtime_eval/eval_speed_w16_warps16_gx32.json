@@ -1,0 +1,121 @@
+{
+  "runner_mode": "qtip",
+  "fold_dir": "C:\\models\\GLM53-APEX-FOLD-R39-HYB-W16",
+  "backbone_dir": "C:\\models\\GLM53-backbone-r34h",
+  "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "chunk": 1,
+  "execution": "graph_n1",
+  "coverage": {
+    "groups": {
+      "qb": 29
+    },
+    "unique_ids": true,
+    "positions": {
+      "qb": 39842
+    },
+    "complete": false
+  },
+  "kl_budget": 0.23,
+  "rows": [],
+  "qbench": {
+    "kl": 0.0,
+    "top1": 0.0,
+    "positions": 0,
+    "rows": 0,
+    "pass_kl_budget": true
+  },
+  "domains": {},
+  "speed_gate": {
+    "rounds": 3,
+    "max_new_tokens": 128,
+    "per_prompt_mean_tok_s": {
+      "code": 14.226,
+      "capital": 18.241,
+      "math": 15.863,
+      "systems": 18.107
+    },
+    "overall_mean_tok_s": 16.609,
+    "pass_18_tok_s_gate": false,
+    "runs": [
+      {
+        "round": 1,
+        "prompt": "code",
+        "tok_s": 12.029,
+        "hit_rate": 0.6266
+      },
+      {
+        "round": 1,
+        "prompt": "capital",
+        "tok_s": 17.335,
+        "hit_rate": 0.721
+      },
+      {
+        "round": 1,
+        "prompt": "math",
+        "tok_s": 15.499,
+        "hit_rate": 0.7398
+      },
+      {
+        "round": 1,
+        "prompt": "systems",
+        "tok_s": 17.944,
+        "hit_rate": 0.7606
+      },
+      {
+        "round": 2,
+        "prompt": "code",
+        "tok_s": 15.317,
+        "hit_rate": 0.7622
+      },
+      {
+        "round": 2,
+        "prompt": "capital",
+        "tok_s": 18.698,
+        "hit_rate": 0.7752
+      },
+      {
+        "round": 2,
+        "prompt": "math",
+        "tok_s": 16.043,
+        "hit_rate": 0.7762
+      },
+      {
+        "round": 2,
+        "prompt": "systems",
+        "tok_s": 18.191,
+        "hit_rate": 0.7826
+      },
+      {
+        "round": 3,
+        "prompt": "code",
+        "tok_s": 15.331,
+        "hit_rate": 0.7811
+      },
+      {
+        "round": 3,
+        "prompt": "capital",
+        "tok_s": 18.691,
+        "hit_rate": 0.7872
+      },
+      {
+        "round": 3,
+        "prompt": "math",
+        "tok_s": 16.046,
+        "hit_rate": 0.7868
+      },
+      {
+        "round": 3,
+        "prompt": "systems",
+        "tok_s": 18.187,
+        "hit_rate": 0.7902
+      }
+    ],
+    "vram_free_gib_before": 1.63,
+    "env": {
+      "R37_GPU_WINDOW": "1",
+      "R39_QTIP_GX": "32",
+      "R39_QTIP_WARPS": "16"
+    }
+  },
+  "elapsed_min": 3.19
+}

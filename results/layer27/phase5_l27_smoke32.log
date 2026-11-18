@@ -1,0 +1,4 @@
+[L27] Loaded 32 exact experts + 40161 'qb' tokens (24600 scored content tokens) in 4.5s
+[CODEBOOK GATE] Held-out N(0,1) k=2 SNR: QTIP L=16 mul1 = 11.484 dB | QTIP L=16 HYB = 11.539 dB
+[RESULT] TCQ33_A_best                  : {"content_snr_db": 8.839, "norm_ratio": 0.9798, "cos": 0.93354, "bpw": 2.0216, "weight_snr_db": {"g": 10.266, "u": 10.238, "d": 11.084}, "seconds": 11.0}
+[RESULT] QTIP_L16_mul1_1D              : {"content_snr_db": 7.927, "norm_ratio": 0.9922, "cos": 0.91881, "delta_vs_tcq33_db": -0.912, "bpw": 2.0112, "weight_snr_db": {"g": 10.654, "u": 10.648, "d": 11.479}, "h_snr_db": {"g": 11.911, "u": 11.184, "d": 11.558}, "seconds": 77.1}

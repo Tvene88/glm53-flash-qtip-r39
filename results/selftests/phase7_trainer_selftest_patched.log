@@ -1,0 +1,13 @@
+<PKG_ROOT>\claude_r39_qtip\build_r39\r39_stage2b_global_kl_trainer.py:44: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
+  --backbone-dir C:\models\GLM53-backbone-r34h \
+[SELFTEST] Running end-to-end Stage-2B Layer-Major Global-KL verification on NVIDIA GeForce RTX 5090...
+  [INIT] Pre-FT Global Teacher KL = 0.18197 nats | top1 = 0.1165
+  [PHASES] A forward 0s (peak 0.0 GiB) | B head 0s | C reverse windows 1s (peak 0.0 GiB)
+  [SWEEP 1] KL = 0.18197 nats | peak_VRAM = 0.025 GiB | d_router=0.00895 d_hyb=0.00383 d_scale=0.00400
+  [PHASES] A forward 0s (peak 0.0 GiB) | B head 0s | C reverse windows 0s (peak 0.0 GiB)
+  [SWEEP 2] KL = 0.17733 nats | peak_VRAM = 0.025 GiB | d_router=0.01776 d_hyb=0.00751 d_scale=0.00735
+  [PHASES] A forward 0s (peak 0.0 GiB) | B head 0s | C reverse windows 0s (peak 0.0 GiB)
+  [SWEEP 3] KL = 0.17288 nats | peak_VRAM = 0.025 GiB | d_router=0.02650 d_hyb=0.01113 d_scale=0.01033
+  [PHASES] A forward 0s (peak 0.0 GiB) | B head 0s | C reverse windows 0s (peak 0.0 GiB)
+  [SWEEP 4] KL = 0.16863 nats | peak_VRAM = 0.025 GiB | d_router=0.03529 d_hyb=0.01465 d_scale=0.01299
+[SELFTEST PASSED] Global Teacher KL dropped 0.18197 -> 0.16520 nats (held-out KL=0.23364); exact 0-byte archive invariance verified (160156 B)!

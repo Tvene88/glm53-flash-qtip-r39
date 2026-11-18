@@ -1,0 +1,106 @@
+{
+  "L27_qb_calct_E288": {
+    "QTIP_L16_HYB_2D16": {
+      "content_snr_db": 9.616,
+      "norm_ratio": 0.9817,
+      "cos": 0.94452,
+      "delta_vs_tcq33_db": 0.428,
+      "bpw": 2.0112,
+      "weight_snr_db": {
+        "g": 10.597,
+        "u": 10.568,
+        "d": 11.396
+      },
+      "h_snr_db": {
+        "g": 14.335,
+        "u": 13.665,
+        "d": 12.145
+      },
+      "seconds": 258.2,
+      "nvrtc_gemv_check": {
+        "gemv_cos_vs_ref": 1.0,
+        "gemv_max_rel_err": 1e-06,
+        "gemv_8pair_us": 67.49
+      }
+    },
+    "QTIP_L16_HYB_2D16_QZ": {
+      "content_snr_db": 9.581,
+      "norm_ratio": 0.9676,
+      "cos": 0.94363,
+      "delta_vs_tcq33_db": 0.393,
+      "bpw": 2.0112,
+      "weight_snr_db": {
+        "g": 10.597,
+        "u": 10.568,
+        "d": 11.419
+      },
+      "h_snr_db": {
+        "g": 14.335,
+        "u": 13.665,
+        "d": 12.0
+      },
+      "seconds": 268.2,
+      "nvrtc_gemv_check": {
+        "gemv_cos_vs_ref": 1.0,
+        "gemv_max_rel_err": 1e-06,
+        "gemv_8pair_us": 313.21
+      }
+    },
+    "QTIP_L16_HYB_2D16_QZ_Tune": {
+      "content_snr_db": 9.597,
+      "norm_ratio": 0.9382,
+      "cos": 0.94356,
+      "delta_vs_tcq33_db": 0.409,
+      "bpw": 2.0112,
+      "weight_snr_db": {
+        "g": 10.597,
+        "u": 10.568,
+        "d": 11.419
+      },
+      "h_snr_db": {
+        "g": 14.335,
+        "u": 13.665,
+        "d": 12.0
+      },
+      "seconds": 410.6,
+      "nvrtc_gemv_check": {
+        "gemv_cos_vs_ref": 1.0,
+        "gemv_max_rel_err": 1e-06,
+        "gemv_8pair_us": 68.27
+      },
+      "joint_tune": {
+        "experts_tuned": 215,
+        "val_rel_err_before": 0.07592,
+        "val_rel_err_after": 0.07311
+      }
+    },
+    "QTIP_Sub70_GU125_2D16_QZ_Tune": {
+      "content_snr_db": 8.882,
+      "norm_ratio": 0.9334,
+      "cos": 0.93309,
+      "delta_vs_tcq33_db": -0.306,
+      "bpw": 1.9278,
+      "weight_snr_db": {
+        "g": 9.139,
+        "u": 9.069,
+        "d": 11.419
+      },
+      "h_snr_db": {
+        "g": 12.713,
+        "u": 12.003,
+        "d": 11.983
+      },
+      "seconds": 468.9,
+      "nvrtc_gemv_check": {
+        "gemv_cos_vs_ref": 0.9999999,
+        "gemv_max_rel_err": 1e-06,
+        "gemv_8pair_us": 67.01
+      },
+      "joint_tune": {
+        "experts_tuned": 232,
+        "val_rel_err_before": 0.08568,
+        "val_rel_err_after": 0.08326
+      }
+    }
+  }
+}

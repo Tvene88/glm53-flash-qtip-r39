@@ -1,0 +1,15 @@
+START 2026-11-17 07:30:57 Phase 8 speed variants, QTIP W16 untuned, pool 18 GiB
+--- variant runbook_env 07:31:05 env: R37_POOL_REG_TOPK=6 R36_FP8_GEMV=v2 R36_FUSE_MHC=1
+[r39-ready] Loaded 42 QTIP HYB layers (qtip_hyb_A_custom, 6326528 B/row), patched_routers=0, pool=3054 VRAM slots (18.0 GiB) + 41.8 GiB cudaHostRegister DDR5, graphs=True, mtp=False in 66.9s
+[eval-r39] runner loaded in 68s; VRAM free 1.63 of 31.82 GiB
+[eval-r39] speed gate: VRAM free 1.63 of 31.82 GiB
+[EVAL SUMMARY] {"kl": 0.0, "top1": 0.0, "positions": 0, "rows": 0, "pass_kl_budget": true}
+[SPEED SUMMARY] {"rounds": 3, "max_new_tokens": 128, "per_prompt_mean_tok_s": {"code": 13.846, "capital": 17.694, "math": 15.431, "systems": 17.305}, "overall_mean_tok_s": 16.069, "pass_18_tok_s_gate": false, "vram_free_gib_before": 1.63, "env": {"R36_FP8_GEMV": "v2", "R36_FUSE_MHC": "1", "R37_GPU_WINDOW": "1", "R37_POOL_REG_TOPK": "6"}}
+exit=0 07:34:31
+--- variant warps16_gx32 07:34:39 env: R39_QTIP_GX=32 R39_QTIP_WARPS=16
+[r39-ready] Loaded 42 QTIP HYB layers (qtip_hyb_A_custom, 6326528 B/row), patched_routers=0, pool=3054 VRAM slots (18.0 GiB) + 41.8 GiB cudaHostRegister DDR5, graphs=True, mtp=False in 65.8s
+[eval-r39] runner loaded in 67s; VRAM free 1.63 of 31.82 GiB
+[eval-r39] speed gate: VRAM free 1.63 of 31.82 GiB
+[EVAL SUMMARY] {"kl": 0.0, "top1": 0.0, "positions": 0, "rows": 0, "pass_kl_budget": true}
+[SPEED SUMMARY] {"rounds": 3, "max_new_tokens": 128, "per_prompt_mean_tok_s": {"code": 14.226, "capital": 18.241, "math": 15.863, "systems": 18.107}, "overall_mean_tok_s": 16.609, "pass_18_tok_s_gate": false, "vram_free_gib_before": 1.63, "env": {"R37_GPU_WINDOW": "1", "R39_QTIP_GX": "32", "R39_QTIP_WARPS": "16"}}
+exit=0 07:38:01

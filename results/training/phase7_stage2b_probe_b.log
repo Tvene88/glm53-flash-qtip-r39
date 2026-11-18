@@ -1,0 +1,6 @@
+START 2026-11-17 02:39:25 window 4 macro 32, best state chosen on real positions
+[STAGE-2B] Archive format='qtip_hyb' from C:/models/GLM53-APEX-FOLD-R39-HYB-W16 | Backbone=C:/models/GLM53-backbone
+[DATA] Packed 128 train seqs + 29 qbench seqs (S=2048)
+[TEACHER] Loaded cached Top-128+Tail teacher targets from C:/models/r39_teacher_top128/train_cal_top128.pt
+[EVAL 0] Initial qbench KL = 3.83730 nats | top1 = 0.5971
+[EVAL 0] qbench KL = 3.83730 nats | top1 = 0.5971 | real positions only: KL = 0.29058, top1 = 0.8371 (39871 tok) | 169s

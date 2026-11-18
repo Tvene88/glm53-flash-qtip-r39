@@ -1,0 +1,77 @@
+START 2026-11-17 11:13:34 step sweep extra '' tag k2
+--- kernel sweep, real rows 11:13:39 | R37_GPU_WINDOW=1
+[SELFTEST-KERNEL] E1 CPU: the v2 code-word windows give v1's states in all 8192 cases (k = 1 and k = 2, 32 lanes, 4 states)
+[SELFTEST-KERNEL] device: NVIDIA GeForce RTX 5090; v1 launches with R39_QTIP_WARPS=8 R39_QTIP_GX=64; v2 = [warps=8 gx=64 pf=4 x=shared fuse_gu=1]; 8 v2 launch variants compiled in 0.8s
+  [E2] synthetic D=64 (as --selftest): 88 comparisons v1 == v2 bitwise (3 GEMVs x 2 activation modes + 5 decode_core cases, 8 v2 variants)
+  [E2] synthetic D=64, row stride = row + 48 B (pool convention): 88 comparisons v1 == v2 bitwise (3 GEMVs x 2 activation modes + 5 decode_core cases, 8 v2 variants)
+  [E2] random slab, rule A (6,326,528 B/row, 64 rows): 88 comparisons v1 == v2 bitwise (3 GEMVs x 2 activation modes + 5 decode_core cases, 8 v2 variants)
+  [E3] random slab, rule A (6,326,528 B/row, 64 rows): N=1: 16 replayed graph outputs equal to v1 bitwise (8 row sets of 8)
+  [B] random slab, rule A (6,326,528 B/row, 64 rows): graph replay, N=1, decode_core   [v1]: median    298.2 us (p10 296.2, p90 300.1; rounds 298.1, 298.2), back-to-back mean    293.4 us over 2 x 2000 calls | x42 layers = 12.52 ms/token
+  [B] random slab, rule A (6,326,528 B/row, 64 rows): graph replay, N=1, decode_core   [v2]: median    126.1 us (p10 125.1, p90 127.1; rounds 126.2, 126.1), back-to-back mean    121.0 us over 2 x 2000 calls | x42 layers = 5.30 ms/token | v1/this: x2.365 (median), x2.424 (back-to-back)
+  [B] random slab, rule A (6,326,528 B/row, 64 rows): graph replay, N=1, 3 GEMVs only  [v1]: median    259.4 us (p10 259.1, p90 261.4; rounds 259.4, 259.4), back-to-back mean    254.9 us over 2 x 2000 calls | x42 layers = 10.89 ms/token
+  [B] random slab, rule A (6,326,528 B/row, 64 rows): graph replay, N=1, 3 GEMVs only  [v2]: median     89.3 us (p10 88.3, p90 89.8; rounds 89.3, 89.3), back-to-back mean     87.7 us over 2 x 2000 calls | x42 layers = 3.75 ms/token | v1/this: x2.905 (median), x2.908 (back-to-back)
+  [B] random slab, rule A (6,326,528 B/row, 64 rows): eager (Python + launches), N=1, decode_core [v1]: median    460.1 us, back-to-back mean    423.4 us over 2000 calls
+  [B] random slab, rule A (6,326,528 B/row, 64 rows): eager (Python + launches), N=1, decode_core [v2]: median    389.2 us, back-to-back mean    386.5 us over 2000 calls
+  [E3] random slab, rule A (6,326,528 B/row, 64 rows): N=2: 8 replayed graph outputs equal to v1 bitwise (4 row sets of 16)
+  [B] random slab, rule A (6,326,528 B/row, 64 rows): graph replay, N=2, decode_core   [v1]: median    331.0 us (p10 326.1, p90 334.1; rounds 328.6, 332.0), back-to-back mean    329.1 us over 2 x 2000 calls
+  [B] random slab, rule A (6,326,528 B/row, 64 rows): graph replay, N=2, decode_core   [v2]: median    174.4 us (p10 173.3, p90 176.5; rounds 174.4, 174.4), back-to-back mean    172.2 us over 2 x 2000 calls | v1/this: x1.898 (median), x1.911 (back-to-back)
+  [B] random slab, rule A (6,326,528 B/row, 64 rows): graph replay, N=2, 3 GEMVs only  [v1]: median    292.9 us (p10 289.1, p90 295.1; rounds 292.8, 293.0), back-to-back mean    289.8 us over 2 x 2000 calls
+  [B] random slab, rule A (6,326,528 B/row, 64 rows): graph replay, N=2, 3 GEMVs only  [v2]: median    142.6 us (p10 140.5, p90 143.7; rounds 142.5, 142.6), back-to-back mean    142.9 us over 2 x 2000 calls | v1/this: x2.054 (median), x2.028 (back-to-back)
+  [E2] random slab, rule GU125 (6,064,384 B/row, 64 rows): 88 comparisons v1 == v2 bitwise (3 GEMVs x 2 activation modes + 5 decode_core cases, 8 v2 variants)
+  [E3] random slab, rule GU125 (6,064,384 B/row, 64 rows): N=1: 16 replayed graph outputs equal to v1 bitwise (8 row sets of 8)
+  [B] random slab, rule GU125 (6,064,384 B/row, 64 rows): graph replay, N=1, decode_core   [v1]: median    298.2 us (p10 297.1, p90 300.4; rounds 298.2, 298.3), back-to-back mean    293.7 us over 2 x 2000 calls | x42 layers = 12.52 ms/token
+  [B] random slab, rule GU125 (6,064,384 B/row, 64 rows): graph replay, N=1, decode_core   [v2]: median    126.2 us (p10 126.0, p90 127.1; rounds 126.2, 126.2), back-to-back mean    121.1 us over 2 x 2000 calls | x42 layers = 5.30 ms/token | v1/this: x2.363 (median), x2.425 (back-to-back)
+  [B] random slab, rule GU125 (6,064,384 B/row, 64 rows): graph replay, N=1, 3 GEMVs only  [v1]: median    261.0 us (p10 259.2, p90 262.2; rounds 261.0, 261.0), back-to-back mean    255.5 us over 2 x 2000 calls | x42 layers = 10.96 ms/token
+  [B] random slab, rule GU125 (6,064,384 B/row, 64 rows): graph replay, N=1, 3 GEMVs only  [v2]: median     89.3 us (p10 89.0, p90 90.1; rounds 89.3, 89.3), back-to-back mean     87.8 us over 2 x 2000 calls | x42 layers = 3.75 ms/token | v1/this: x2.923 (median), x2.909 (back-to-back)
+  [B] random slab, rule GU125 (6,064,384 B/row, 64 rows): eager (Python + launches), N=1, decode_core [v1]: median    458.9 us, back-to-back mean    420.7 us over 2000 calls
+  [B] random slab, rule GU125 (6,064,384 B/row, 64 rows): eager (Python + launches), N=1, decode_core [v2]: median    385.1 us, back-to-back mean    391.5 us over 2000 calls
+  [E3] random slab, rule GU125 (6,064,384 B/row, 64 rows): N=2: 8 replayed graph outputs equal to v1 bitwise (4 row sets of 16)
+  [B] random slab, rule GU125 (6,064,384 B/row, 64 rows): graph replay, N=2, decode_core   [v1]: median    330.0 us (p10 325.0, p90 334.9; rounds 328.9, 330.9), back-to-back mean    328.7 us over 2 x 2000 calls
+  [B] random slab, rule GU125 (6,064,384 B/row, 64 rows): graph replay, N=2, decode_core   [v2]: median    175.4 us (p10 173.4, p90 178.2; rounds 175.4, 175.5), back-to-back mean    173.0 us over 2 x 2000 calls | v1/this: x1.881 (median), x1.900 (back-to-back)
+  [B] random slab, rule GU125 (6,064,384 B/row, 64 rows): graph replay, N=2, 3 GEMVs only  [v1]: median    292.1 us (p10 290.0, p90 295.1; rounds 292.1, 292.1), back-to-back mean    289.5 us over 2 x 2000 calls
+  [B] random slab, rule GU125 (6,064,384 B/row, 64 rows): graph replay, N=2, 3 GEMVs only  [v2]: median    142.6 us (p10 140.5, p90 143.9; rounds 142.6, 142.6), back-to-back mean    142.9 us over 2 x 2000 calls | v1/this: x2.048 (median), x2.027 (back-to-back)
+  loaded C:\models\GLM53-APEX-FOLD-R39-HYB-W16\layer_24_qtip_hyb.pt in 1.2s
+  [E2] REAL rows, layer_24_qtip_hyb.pt (rule A, 6,326,528 B/row, first 64 rows): 88 comparisons v1 == v2 bitwise (3 GEMVs x 2 activation modes + 5 decode_core cases, 8 v2 variants)
+  [E3] REAL rows, layer_24_qtip_hyb.pt (rule A, 6,326,528 B/row, first 64 rows): N=1: 16 replayed graph outputs equal to v1 bitwise (8 row sets of 8)
+  [B] REAL rows, layer_24_qtip_hyb.pt (rule A, 6,326,528 B/row, first 64 rows): graph replay, N=1, decode_core   [v1]: median    298.2 us (p10 297.1, p90 300.7; rounds 298.3, 298.2), back-to-back mean    293.5 us over 2 x 2000 calls | x42 layers = 12.52 ms/token
+  [B] REAL rows, layer_24_qtip_hyb.pt (rule A, 6,326,528 B/row, first 64 rows): graph replay, N=1, decode_core   [v2]: median    126.2 us (p10 125.9, p90 127.1; rounds 126.2, 126.2), back-to-back mean    121.0 us over 2 x 2000 calls | x42 layers = 5.30 ms/token | v1/this: x2.363 (median), x2.426 (back-to-back)
+  [B] REAL rows, layer_24_qtip_hyb.pt (rule A, 6,326,528 B/row, first 64 rows): graph replay, N=1, 3 GEMVs only  [v1]: median    260.0 us (p10 259.2, p90 261.5; rounds 260.2, 259.5), back-to-back mean    255.1 us over 2 x 2000 calls | x42 layers = 10.92 ms/token
+  [B] REAL rows, layer_24_qtip_hyb.pt (rule A, 6,326,528 B/row, first 64 rows): graph replay, N=1, 3 GEMVs only  [v2]: median     89.3 us (p10 88.1, p90 90.0; rounds 89.3, 89.3), back-to-back mean     88.2 us over 2 x 2000 calls | x42 layers = 3.75 ms/token | v1/this: x2.912 (median), x2.893 (back-to-back)
+  [B] REAL rows, layer_24_qtip_hyb.pt (rule A, 6,326,528 B/row, first 64 rows): eager (Python + launches), N=1, decode_core [v1]: median    458.9 us, back-to-back mean    414.2 us over 2000 calls
+  [B] REAL rows, layer_24_qtip_hyb.pt (rule A, 6,326,528 B/row, first 64 rows): eager (Python + launches), N=1, decode_core [v2]: median    384.9 us, back-to-back mean    396.0 us over 2000 calls
+  [E3] REAL rows, layer_24_qtip_hyb.pt (rule A, 6,326,528 B/row, first 64 rows): N=2: 8 replayed graph outputs equal to v1 bitwise (4 row sets of 16)
+  [B] REAL rows, layer_24_qtip_hyb.pt (rule A, 6,326,528 B/row, first 64 rows): graph replay, N=2, decode_core   [v1]: median    331.9 us (p10 326.9, p90 334.3; rounds 329.2, 332.6), back-to-back mean    329.8 us over 2 x 2000 calls
+  [B] REAL rows, layer_24_qtip_hyb.pt (rule A, 6,326,528 B/row, first 64 rows): graph replay, N=2, decode_core   [v2]: median    175.4 us (p10 174.0, p90 177.4; rounds 175.5, 175.4), back-to-back mean    172.8 us over 2 x 2000 calls | v1/this: x1.892 (median), x1.909 (back-to-back)
+  [B] REAL rows, layer_24_qtip_hyb.pt (rule A, 6,326,528 B/row, first 64 rows): graph replay, N=2, 3 GEMVs only  [v1]: median    294.0 us (p10 290.2, p90 296.0; rounds 293.8, 294.1), back-to-back mean    290.9 us over 2 x 2000 calls
+  [B] REAL rows, layer_24_qtip_hyb.pt (rule A, 6,326,528 B/row, first 64 rows): graph replay, N=2, 3 GEMVs only  [v2]: median    143.6 us (p10 141.5, p90 145.6; rounds 143.5, 143.6), back-to-back mean    143.4 us over 2 x 2000 calls | v1/this: x2.047 (median), x2.029 (back-to-back)
+  [SWEEP] REAL rows, layer_24_qtip_hyb.pt (rule A, 6,326,528 B/row, first 64 rows): decode_core N=1 in a graph, 25 v2 settings
+  [E3] REAL rows, layer_24_qtip_hyb.pt (rule A, 6,326,528 B/row, first 64 rows) sweep: N=1: 100 replayed graph outputs equal to v1 bitwise (4 row sets of 8)
+  [SWEEP] REAL rows, layer_24_qtip_hyb.pt (rule A, 6,326,528 B/row, first 64 rows): sorted by median us per decode_core, 2 x 2000 calls each (v1 = 298.0 us; x42 layers = 12.52 ms/token):
+         111.6 us  (back-to-back    107.2)  v1/this x2.670    4.69 ms/token  warps=16 gx=64 pf=8 x=shared fuse_gu=1
+         113.6 us  (back-to-back    108.9)  v1/this x2.623    4.77 ms/token  warps=8 gx=64 pf=8 x=shared fuse_gu=1
+         116.6 us  (back-to-back    111.2)  v1/this x2.556    4.90 ms/token  warps=4 gx=64 pf=8 x=shared fuse_gu=1
+         123.9 us  (back-to-back    119.1)  v1/this x2.405    5.20 ms/token  warps=16 gx=64 pf=4 x=shared fuse_gu=1
+         125.9 us  (back-to-back    121.1)  v1/this x2.367    5.29 ms/token  warps=8 gx=64 pf=4 x=shared fuse_gu=1
+         127.9 us  (back-to-back    123.3)  v1/this x2.330    5.37 ms/token  warps=4 gx=64 pf=4 x=shared fuse_gu=1
+         144.3 us  (back-to-back    138.6)  v1/this x2.065    6.06 ms/token  warps=16 gx=64 pf=2 x=global fuse_gu=1
+         146.4 us  (back-to-back    141.8)  v1/this x2.036    6.15 ms/token  warps=16 gx=64 pf=2 x=shared fuse_gu=1
+         148.5 us  (back-to-back    143.8)  v1/this x2.007    6.24 ms/token  warps=8 gx=64 pf=2 x=shared fuse_gu=1
+         150.4 us  (back-to-back    144.0)  v1/this x1.981    6.32 ms/token  warps=4 gx=64 pf=8 x=global fuse_gu=1
+         150.5 us  (back-to-back    145.3)  v1/this x1.980    6.32 ms/token  warps=4 gx=64 pf=2 x=shared fuse_gu=1
+         152.5 us  (back-to-back    148.0)  v1/this x1.954    6.41 ms/token  warps=4 gx=64 pf=0 x=global fuse_gu=1
+         152.6 us  (back-to-back    148.0)  v1/this x1.953    6.41 ms/token  warps=8 gx=64 pf=8 x=global fuse_gu=1
+         153.7 us  (back-to-back    148.1)  v1/this x1.939    6.46 ms/token  warps=4 gx=64 pf=2 x=global fuse_gu=1
+         154.5 us  (back-to-back    148.5)  v1/this x1.929    6.49 ms/token  warps=4 gx=64 pf=4 x=global fuse_gu=1
+         154.5 us  (back-to-back    149.8)  v1/this x1.929    6.49 ms/token  warps=8 gx=64 pf=0 x=global fuse_gu=1
+         154.6 us  (back-to-back    149.8)  v1/this x1.928    6.49 ms/token  warps=8 gx=64 pf=2 x=global fuse_gu=1
+         154.6 us  (back-to-back    150.1)  v1/this x1.928    6.49 ms/token  warps=16 gx=64 pf=8 x=global fuse_gu=1
+         156.6 us  (back-to-back    151.3)  v1/this x1.903    6.58 ms/token  warps=16 gx=64 pf=0 x=global fuse_gu=1
+         158.5 us  (back-to-back    152.5)  v1/this x1.880    6.66 ms/token  warps=8 gx=64 pf=4 x=global fuse_gu=1
+         158.6 us  (back-to-back    152.9)  v1/this x1.879    6.66 ms/token  warps=16 gx=64 pf=0 x=shared fuse_gu=1
+         158.7 us  (back-to-back    154.0)  v1/this x1.878    6.67 ms/token  warps=16 gx=64 pf=4 x=global fuse_gu=1
+         160.6 us  (back-to-back    155.0)  v1/this x1.856    6.75 ms/token  warps=8 gx=64 pf=0 x=shared fuse_gu=1
+         162.9 us  (back-to-back    158.0)  v1/this x1.829    6.84 ms/token  warps=4 gx=64 pf=0 x=shared fuse_gu=1
+         172.2 us  (back-to-back    167.0)  v1/this x1.731    7.23 ms/token  warps=8 gx=64 pf=4 x=shared fuse_gu=0
+         298.0 us  (back-to-back    293.4)  v1/this x1.000   12.52 ms/token  v1
+[SELFTEST-KERNEL PASSED] 440 eager comparisons and every replayed graph output: v2 == v1 bitwise. The timings above are per layer and cold; they do not include the backbone or the pool traffic.
+exit=0 11:15:16

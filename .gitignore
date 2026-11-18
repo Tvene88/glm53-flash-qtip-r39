@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# model files, checkpoints and tensors: never in this repository
+*.pt
+*.pt.last
+*.slab
+*.npz
+*.safetensors
+*.gguf
+*.bin
+
+# run outputs of the scripts (reports that are published are copied into results/ by hand)
+out/
+runtime/out_r39s/
+build/out_r32/
+build/out_r39/
+bench/runs/
+
+# private data: calibration text, test rows, teacher caches
+calib_text/
+cal_trace*.json
+qbench_prompts*.json
+r34_prune_data.json
+*teacher_top128*
+
+# local tools and editor files
+evidence/
+serve/
+.vscode/
+.idea/
+*.log.tmp
+Thumbs.db
+.DS_Store

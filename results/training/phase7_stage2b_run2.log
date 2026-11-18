@@ -1,0 +1,137 @@
+START 2026-11-17 04:04:12 Stage 2B: 6 sweeps x 4 steps of 32 seqs, optimizer windows 4 (shipped), grad window 1, chunks of 4, eval after every step
+[STAGE-2B] Archive format='qtip_hyb' from C:/models/GLM53-APEX-FOLD-R39-HYB-W16 | Backbone=C:/models/GLM53-backbone
+[DATA] Packed 128 train seqs + 29 qbench seqs (S=2048)
+[TEACHER] Loaded cached Top-128+Tail teacher targets from C:/models/r39_teacher_top128/train_cal_top128.pt
+    [eval L3 at 14s] RSS 81.5 private 77.9 RAM-free 33.5 GiB | VRAM alloc 3.7 peak 19.9 reserved 4.0 dev-free 26.1 GiB
+    [eval L14 at 57s] RSS 80.6 private 77.0 RAM-free 34.5 GiB | VRAM alloc 3.8 peak 19.9 reserved 4.5 dev-free 25.6 GiB
+    [eval L25 at 98s] RSS 80.2 private 77.0 RAM-free 34.8 GiB | VRAM alloc 4.0 peak 19.9 reserved 5.0 dev-free 25.2 GiB
+    [eval L36 at 139s] RSS 80.9 private 78.3 RAM-free 34.1 GiB | VRAM alloc 4.2 peak 19.9 reserved 5.2 dev-free 24.9 GiB
+[EVAL 0] Initial qbench KL = 3.83730 nats | top1 = 0.5971
+[EVAL 0] qbench KL = 3.83730 nats | top1 = 0.5971 | real positions only: KL = 0.29058, top1 = 0.8371 (39871 tok) | 170s
+    [A done 72s] 45 window checkpoints 11.2 GiB, h (1, 2048, 4, 4096) torch.bfloat16 | RSS 92.2 private 95.0 RAM-free 22.8 GiB | VRAM alloc 2.5 peak 20.5 reserved 5.0 dev-free 25.1 GiB
+    [C window 44 L44..44 done at 10s, peak 26.0 GiB] RSS 92.6 private 94.0 RAM-free 22.4 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.7 GiB
+    [C window 43 L43..43 done at 20s, peak 14.7 GiB] RSS 92.6 private 94.0 RAM-free 22.4 GiB | VRAM alloc 2.4 peak 14.7 reserved 3.5 dev-free 26.7 GiB
+    [C window 42 L42..42 done at 30s, peak 26.0 GiB] RSS 92.6 private 94.0 RAM-free 22.4 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.7 GiB
+    [C window 41 L41..41 done at 40s, peak 26.1 GiB] RSS 92.6 private 94.1 RAM-free 22.4 GiB | VRAM alloc 2.4 peak 26.1 reserved 3.5 dev-free 26.7 GiB
+    [C window 40 L40..40 done at 51s, peak 26.0 GiB] RSS 92.6 private 94.1 RAM-free 22.4 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 39 L39..39 done at 60s, peak 14.5 GiB] RSS 92.6 private 94.1 RAM-free 22.4 GiB | VRAM alloc 2.4 peak 14.5 reserved 3.5 dev-free 26.6 GiB
+    [C window 38 L38..38 done at 70s, peak 26.0 GiB] RSS 92.6 private 94.1 RAM-free 22.4 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 37 L37..37 done at 80s, peak 26.0 GiB] RSS 92.6 private 94.1 RAM-free 22.4 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 36 L36..36 done at 90s, peak 26.0 GiB] RSS 92.6 private 94.1 RAM-free 22.4 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 35 L35..35 done at 99s, peak 14.5 GiB] RSS 92.7 private 94.1 RAM-free 22.3 GiB | VRAM alloc 2.4 peak 14.5 reserved 3.5 dev-free 26.6 GiB
+    [C window 34 L34..34 done at 109s, peak 25.9 GiB] RSS 92.7 private 94.1 RAM-free 22.3 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.5 dev-free 26.6 GiB
+    [C window 33 L33..33 done at 119s, peak 26.0 GiB] RSS 92.7 private 94.1 RAM-free 22.3 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 32 L32..32 done at 129s, peak 25.9 GiB] RSS 92.7 private 94.1 RAM-free 22.3 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.5 dev-free 26.6 GiB
+    [C window 31 L31..31 done at 138s, peak 14.5 GiB] RSS 92.7 private 94.1 RAM-free 22.3 GiB | VRAM alloc 2.4 peak 14.5 reserved 3.5 dev-free 26.6 GiB
+    [C window 30 L30..30 done at 148s, peak 26.0 GiB] RSS 92.7 private 94.2 RAM-free 22.3 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 29 L29..29 done at 158s, peak 26.0 GiB] RSS 92.7 private 94.2 RAM-free 22.3 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 28 L28..28 done at 168s, peak 25.9 GiB] RSS 92.7 private 94.2 RAM-free 22.3 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.5 dev-free 26.6 GiB
+    [C window 27 L27..27 done at 177s, peak 14.7 GiB] RSS 92.7 private 94.2 RAM-free 22.3 GiB | VRAM alloc 2.4 peak 14.7 reserved 3.5 dev-free 26.6 GiB
+    [C window 26 L26..26 done at 186s, peak 25.9 GiB] RSS 92.7 private 94.2 RAM-free 22.3 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.5 dev-free 26.6 GiB
+    [C window 25 L25..25 done at 196s, peak 26.0 GiB] RSS 92.7 private 94.2 RAM-free 22.3 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 24 L24..24 done at 206s, peak 26.1 GiB] RSS 92.7 private 94.2 RAM-free 22.3 GiB | VRAM alloc 2.4 peak 26.1 reserved 3.5 dev-free 26.6 GiB
+    [C window 23 L23..23 done at 215s, peak 14.5 GiB] RSS 92.8 private 94.2 RAM-free 22.2 GiB | VRAM alloc 2.4 peak 14.5 reserved 3.5 dev-free 26.6 GiB
+    [C window 22 L22..22 done at 224s, peak 25.9 GiB] RSS 92.8 private 94.2 RAM-free 22.2 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.5 dev-free 26.6 GiB
+    [C window 21 L21..21 done at 234s, peak 25.9 GiB] RSS 92.8 private 94.2 RAM-free 22.2 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.5 dev-free 26.6 GiB
+    [C window 20 L20..20 done at 244s, peak 26.0 GiB] RSS 92.8 private 94.3 RAM-free 22.2 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 19 L19..19 done at 252s, peak 14.4 GiB] RSS 92.8 private 94.2 RAM-free 22.2 GiB | VRAM alloc 2.4 peak 14.4 reserved 3.5 dev-free 26.6 GiB
+    [C window 18 L18..18 done at 262s, peak 26.0 GiB] RSS 92.8 private 94.3 RAM-free 22.2 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 17 L17..17 done at 272s, peak 26.0 GiB] RSS 92.8 private 94.3 RAM-free 22.2 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 16 L16..16 done at 282s, peak 25.9 GiB] RSS 92.8 private 94.3 RAM-free 22.2 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.5 dev-free 26.6 GiB
+    [C window 15 L15..15 done at 291s, peak 14.5 GiB] RSS 92.8 private 94.3 RAM-free 22.2 GiB | VRAM alloc 2.4 peak 14.5 reserved 3.5 dev-free 26.6 GiB
+    [C window 14 L14..14 done at 301s, peak 26.0 GiB] RSS 92.8 private 94.3 RAM-free 22.1 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 13 L13..13 done at 311s, peak 26.0 GiB] RSS 92.8 private 94.3 RAM-free 22.2 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 12 L12..12 done at 321s, peak 25.9 GiB] RSS 92.8 private 94.3 RAM-free 22.1 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.5 dev-free 26.6 GiB
+    [C window 11 L11..11 done at 330s, peak 14.4 GiB] RSS 92.9 private 94.3 RAM-free 22.1 GiB | VRAM alloc 2.4 peak 14.4 reserved 3.5 dev-free 26.6 GiB
+    [C window 10 L10..10 done at 340s, peak 25.9 GiB] RSS 92.9 private 94.4 RAM-free 22.1 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.5 dev-free 26.6 GiB
+    [C window 9 L9..9 done at 349s, peak 26.0 GiB] RSS 92.9 private 94.4 RAM-free 22.1 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 8 L8..8 done at 359s, peak 25.9 GiB] RSS 92.9 private 94.4 RAM-free 22.1 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.5 dev-free 26.6 GiB
+    [C window 7 L7..7 done at 368s, peak 14.5 GiB] RSS 92.9 private 94.4 RAM-free 22.1 GiB | VRAM alloc 2.4 peak 14.5 reserved 3.5 dev-free 26.6 GiB
+    [C window 6 L6..6 done at 378s, peak 25.9 GiB] RSS 92.9 private 94.4 RAM-free 22.1 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.5 dev-free 26.6 GiB
+    [C window 5 L5..5 done at 388s, peak 25.9 GiB] RSS 92.9 private 94.4 RAM-free 22.1 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.5 dev-free 26.6 GiB
+    [C window 4 L4..4 done at 398s, peak 25.9 GiB] RSS 92.9 private 94.4 RAM-free 22.1 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.5 dev-free 26.6 GiB
+    [C window 3 L3..3 done at 408s, peak 14.6 GiB] RSS 92.9 private 94.4 RAM-free 22.0 GiB | VRAM alloc 2.4 peak 14.6 reserved 3.5 dev-free 26.6 GiB
+    [C window 2 L2..2 done at 409s, peak 18.4 GiB] RSS 92.9 private 94.4 RAM-free 22.0 GiB | VRAM alloc 2.4 peak 18.4 reserved 3.5 dev-free 26.6 GiB
+    [C window 1 L1..1 done at 411s, peak 18.4 GiB] RSS 92.9 private 94.4 RAM-free 22.0 GiB | VRAM alloc 2.4 peak 18.4 reserved 3.5 dev-free 26.6 GiB
+    [C window 0 L0..0 done at 412s, peak 18.4 GiB] RSS 92.9 private 94.4 RAM-free 22.0 GiB | VRAM alloc 2.4 peak 18.4 reserved 3.5 dev-free 26.6 GiB
+    [chunk 0:4] A 72s B 0s C 412s | running train KL 0.50132 | RSS 92.9 private 94.4 RAM-free 22.0 GiB | VRAM alloc 2.4 peak 2.4 reserved 3.5 dev-free 26.6 GiB
+    [chunk 4:8] A 72s B 0s C 410s | running train KL 0.35063 | RSS 92.9 private 94.5 RAM-free 21.8 GiB | VRAM alloc 2.4 peak 2.4 reserved 3.5 dev-free 26.6 GiB
+    [chunk 8:12] A 72s B 0s C 408s | running train KL 0.30163 | RSS 92.9 private 94.5 RAM-free 20.8 GiB | VRAM alloc 2.4 peak 2.4 reserved 3.5 dev-free 26.6 GiB
+    [chunk 12:16] A 71s B 0s C 412s | running train KL 0.31602 | RSS 92.9 private 94.5 RAM-free 20.7 GiB | VRAM alloc 2.4 peak 2.4 reserved 3.5 dev-free 26.6 GiB
+    [chunk 16:20] A 74s B 0s C 412s | running train KL 0.34545 | RSS 92.9 private 94.5 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 2.4 reserved 3.5 dev-free 26.6 GiB
+    [chunk 20:24] A 71s B 0s C 412s | running train KL 0.32793 | RSS 92.9 private 94.5 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 2.4 reserved 3.5 dev-free 26.6 GiB
+    [chunk 24:28] A 71s B 0s C 412s | running train KL 0.29801 | RSS 92.9 private 94.5 RAM-free 19.7 GiB | VRAM alloc 2.4 peak 2.4 reserved 3.5 dev-free 26.6 GiB
+    [chunk 28:32] A 71s B 0s C 408s | running train KL 0.27669 | RSS 92.9 private 94.5 RAM-free 20.0 GiB | VRAM alloc 2.4 peak 2.4 reserved 3.5 dev-free 26.6 GiB
+  [PHASES] A forward 576s (peak 20.5 GiB) | B head 2s | C reverse windows 3285s (peak 26.2 GiB)
+[SWEEP 1 | 0:32] train_KL=0.27669 VRAM=26.20GiB (3863.4s) | {"router_rel_delta": 0.000437, "codebook_rel_delta": 9e-05, "mean_abs_log_scale": 0.000381}
+    [eval L3 at 10s] RSS 93.0 private 96.3 RAM-free 19.9 GiB | VRAM alloc 4.4 peak 20.6 reserved 5.3 dev-free 24.8 GiB
+    [eval L14 at 51s] RSS 93.0 private 96.1 RAM-free 19.9 GiB | VRAM alloc 4.4 peak 20.6 reserved 5.1 dev-free 25.1 GiB
+    [eval L25 at 91s] RSS 93.0 private 96.1 RAM-free 19.9 GiB | VRAM alloc 4.3 peak 20.6 reserved 5.1 dev-free 25.1 GiB
+    [eval L36 at 132s] RSS 93.0 private 96.3 RAM-free 19.9 GiB | VRAM alloc 4.4 peak 20.6 reserved 5.3 dev-free 24.8 GiB
+[EVAL 1.1] qbench KL = 3.82038 nats | top1 = 0.5986 | real positions only: KL = 0.29044, top1 = 0.8383 (39871 tok) | 162s [NEW BEST]
+    [A done 71s] 45 window checkpoints 11.2 GiB, h (1, 2048, 4, 4096) torch.bfloat16 | RSS 93.0 private 96.1 RAM-free 19.9 GiB | VRAM alloc 2.5 peak 20.5 reserved 5.0 dev-free 25.1 GiB
+    [C window 44 L44..44 done at 10s, peak 26.0 GiB] RSS 93.0 private 94.5 RAM-free 19.9 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 43 L43..43 done at 20s, peak 14.6 GiB] RSS 93.0 private 94.5 RAM-free 19.9 GiB | VRAM alloc 2.4 peak 14.6 reserved 3.5 dev-free 26.6 GiB
+    [C window 42 L42..42 done at 30s, peak 26.1 GiB] RSS 93.0 private 94.6 RAM-free 19.9 GiB | VRAM alloc 2.4 peak 26.1 reserved 3.5 dev-free 26.6 GiB
+    [C window 41 L41..41 done at 40s, peak 26.0 GiB] RSS 93.0 private 94.6 RAM-free 19.9 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 40 L40..40 done at 51s, peak 26.0 GiB] RSS 93.0 private 94.6 RAM-free 19.9 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 39 L39..39 done at 60s, peak 14.5 GiB] RSS 93.1 private 94.5 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 14.5 reserved 3.5 dev-free 26.6 GiB
+    [C window 38 L38..38 done at 70s, peak 26.0 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 37 L37..37 done at 80s, peak 26.0 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 36 L36..36 done at 90s, peak 26.0 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 35 L35..35 done at 99s, peak 14.5 GiB] RSS 93.1 private 94.5 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 14.5 reserved 3.5 dev-free 26.6 GiB
+    [C window 34 L34..34 done at 109s, peak 26.0 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 33 L33..33 done at 119s, peak 26.0 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 32 L32..32 done at 129s, peak 26.0 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 31 L31..31 done at 138s, peak 14.5 GiB] RSS 93.1 private 94.5 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 14.5 reserved 3.5 dev-free 26.6 GiB
+    [C window 30 L30..30 done at 148s, peak 26.0 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 29 L29..29 done at 158s, peak 25.9 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.5 dev-free 26.6 GiB
+    [C window 28 L28..28 done at 168s, peak 25.9 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.5 dev-free 26.6 GiB
+    [C window 27 L27..27 done at 177s, peak 14.5 GiB] RSS 93.1 private 94.5 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 14.5 reserved 3.5 dev-free 26.6 GiB
+    [C window 26 L26..26 done at 186s, peak 25.9 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.5 dev-free 26.6 GiB
+    [C window 25 L25..25 done at 196s, peak 25.9 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.5 dev-free 26.6 GiB
+    [C window 24 L24..24 done at 205s, peak 25.9 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.6 dev-free 26.6 GiB
+    [C window 23 L23..23 done at 214s, peak 14.5 GiB] RSS 93.1 private 94.5 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 14.5 reserved 3.6 dev-free 26.6 GiB
+    [C window 22 L22..22 done at 224s, peak 25.9 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.6 dev-free 26.6 GiB
+    [C window 21 L21..21 done at 234s, peak 25.9 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.6 dev-free 26.6 GiB
+    [C window 20 L20..20 done at 243s, peak 26.0 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.6 dev-free 26.6 GiB
+    [C window 19 L19..19 done at 252s, peak 14.5 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 14.5 reserved 3.6 dev-free 26.6 GiB
+    [C window 18 L18..18 done at 262s, peak 26.0 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.6 dev-free 26.6 GiB
+    [C window 17 L17..17 done at 272s, peak 26.0 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.6 dev-free 26.5 GiB
+    [C window 16 L16..16 done at 282s, peak 26.0 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.6 dev-free 26.5 GiB
+    [C window 15 L15..15 done at 291s, peak 14.5 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 14.5 reserved 3.6 dev-free 26.5 GiB
+    [C window 14 L14..14 done at 301s, peak 26.0 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.6 dev-free 26.5 GiB
+    [C window 13 L13..13 done at 311s, peak 26.0 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.6 dev-free 26.5 GiB
+    [C window 12 L12..12 done at 321s, peak 25.9 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.6 dev-free 26.5 GiB
+    [C window 11 L11..11 done at 330s, peak 14.5 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 14.5 reserved 3.6 dev-free 26.5 GiB
+    [C window 10 L10..10 done at 340s, peak 25.9 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.6 dev-free 26.5 GiB
+    [C window 9 L9..9 done at 349s, peak 26.0 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.6 dev-free 26.5 GiB
+    [C window 8 L8..8 done at 359s, peak 25.9 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.6 dev-free 26.5 GiB
+    [C window 7 L7..7 done at 368s, peak 14.5 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 14.5 reserved 3.6 dev-free 26.5 GiB
+    [C window 6 L6..6 done at 378s, peak 25.9 GiB] RSS 93.1 private 94.7 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.6 dev-free 26.5 GiB
+    [C window 5 L5..5 done at 388s, peak 25.9 GiB] RSS 93.1 private 94.7 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.6 dev-free 26.5 GiB
+    [C window 4 L4..4 done at 398s, peak 25.9 GiB] RSS 93.1 private 94.7 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 25.9 reserved 3.6 dev-free 26.5 GiB
+    [C window 3 L3..3 done at 408s, peak 14.6 GiB] RSS 93.1 private 94.6 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 14.6 reserved 3.6 dev-free 26.5 GiB
+    [C window 2 L2..2 done at 409s, peak 18.4 GiB] RSS 93.1 private 94.7 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 18.4 reserved 3.6 dev-free 26.5 GiB
+    [C window 1 L1..1 done at 411s, peak 18.4 GiB] RSS 93.1 private 94.7 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 18.4 reserved 3.6 dev-free 26.5 GiB
+    [C window 0 L0..0 done at 412s, peak 18.4 GiB] RSS 93.1 private 94.7 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 18.4 reserved 3.6 dev-free 26.5 GiB
+    [chunk 0:4] A 71s B 0s C 412s | running train KL 0.25196 | RSS 93.1 private 94.7 RAM-free 19.8 GiB | VRAM alloc 2.4 peak 2.4 reserved 3.6 dev-free 26.5 GiB
+    [chunk 4:8] A 72s B 0s C 422s | running train KL 0.39316 | RSS 93.1 private 94.7 RAM-free 19.4 GiB | VRAM alloc 2.4 peak 2.4 reserved 3.6 dev-free 26.5 GiB
+    [chunk 8:12] A 76s B 0s C 422s | running train KL 0.31804 | RSS 93.1 private 94.7 RAM-free 19.7 GiB | VRAM alloc 2.4 peak 2.4 reserved 3.6 dev-free 26.5 GiB
+    [chunk 12:16] A 75s B 0s C 422s | running train KL 0.28144 | RSS 93.1 private 94.7 RAM-free 19.6 GiB | VRAM alloc 2.4 peak 2.4 reserved 3.6 dev-free 26.5 GiB
+    [chunk 16:20] A 75s B 0s C 421s | running train KL 0.23963 | RSS 93.1 private 94.7 RAM-free 19.6 GiB | VRAM alloc 2.4 peak 2.4 reserved 3.6 dev-free 26.5 GiB
+    [chunk 20:24] A 75s B 0s C 418s | running train KL 0.25409 | RSS 93.1 private 94.7 RAM-free 19.5 GiB | VRAM alloc 2.4 peak 2.4 reserved 3.6 dev-free 26.5 GiB
+    [chunk 24:28] A 75s B 0s C 418s | running train KL 0.24090 | RSS 93.1 private 94.7 RAM-free 19.6 GiB | VRAM alloc 2.4 peak 2.4 reserved 3.6 dev-free 26.5 GiB
+    [chunk 28:32] A 75s B 0s C 418s | running train KL 0.23649 | RSS 93.1 private 94.7 RAM-free 19.7 GiB | VRAM alloc 2.4 peak 2.4 reserved 3.6 dev-free 26.5 GiB
+  [PHASES] A forward 593s (peak 20.5 GiB) | B head 2s | C reverse windows 3354s (peak 26.3 GiB)
+[SWEEP 1 | 32:64] train_KL=0.23649 VRAM=26.27GiB (3949.2s) | {"router_rel_delta": 0.000686, "codebook_rel_delta": 0.000146, "mean_abs_log_scale": 0.000412}
+    [eval L3 at 10s] RSS 93.1 private 96.4 RAM-free 19.7 GiB | VRAM alloc 4.4 peak 20.6 reserved 5.4 dev-free 24.8 GiB
+    [eval L14 at 52s] RSS 93.1 private 96.1 RAM-free 19.7 GiB | VRAM alloc 4.4 peak 20.6 reserved 5.1 dev-free 25.0 GiB
+    [eval L25 at 93s] RSS 93.1 private 96.1 RAM-free 19.7 GiB | VRAM alloc 4.3 peak 20.6 reserved 5.1 dev-free 25.0 GiB
+    [eval L36 at 134s] RSS 93.1 private 96.4 RAM-free 19.7 GiB | VRAM alloc 4.4 peak 20.6 reserved 5.4 dev-free 24.8 GiB
+[EVAL 1.2] qbench KL = 3.81805 nats | top1 = 0.5968 | real positions only: KL = 0.29120, top1 = 0.8375 (39871 tok) | 165s
+    [A done 74s] 45 window checkpoints 11.2 GiB, h (1, 2048, 4, 4096) torch.bfloat16 | RSS 93.1 private 96.1 RAM-free 19.7 GiB | VRAM alloc 2.5 peak 20.5 reserved 5.0 dev-free 25.1 GiB
+    [C window 44 L44..44 done at 10s, peak 26.0 GiB] RSS 93.1 private 94.6 RAM-free 19.7 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+    [C window 43 L43..43 done at 19s, peak 14.6 GiB] RSS 93.1 private 94.5 RAM-free 19.7 GiB | VRAM alloc 2.4 peak 14.6 reserved 3.5 dev-free 26.6 GiB
+    [C window 42 L42..42 done at 30s, peak 26.0 GiB] RSS 93.1 private 94.6 RAM-free 19.7 GiB | VRAM alloc 2.4 peak 26.0 reserved 3.5 dev-free 26.6 GiB
+exit=-1 end 06:25:41

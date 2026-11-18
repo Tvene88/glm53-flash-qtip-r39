@@ -1,0 +1,52 @@
+
+============================================================================================
+[STAGE: selftest:r39_l27_qtip_2d_ldlq_lab] <PYTHON> -u <PKG_ROOT>\claude_r39_qtip\build_r39\r39_l27_qtip_2d_ldlq_lab.py --selftest
+============================================================================================
+[SELFTEST] Device: NVIDIA GeForce RTX 5090
+  [GATE-1] HYB L=16 V=2 k=1: bitpack=EXACT, Gaussian SNR=5.668 dB
+  [GATE-1] HYB L=16 V=2 k=2: bitpack=EXACT, Gaussian SNR=11.524 dB
+  [GATE-1] mul1 L=16 V=1 k=2: bitpack=EXACT, Gaussian SNR=11.490 dB (1.9s)
+  [GATE-2] HYB_1D_g256       : routed SNR=6.474 dB, cos=0.89297
+  [GATE-2] HYB_2D_16x16      : routed SNR=8.026 dB, cos=0.92173 | NVRTC GEMV cos=0.9999999
+  [GATE-2] HYB_2D_16x16_QZ   : routed SNR=7.888 dB, cos=0.91681 | NVRTC GEMV cos=0.9999999
+[SELFTEST PASSED] All NVRTC kernels, bitpack bijections, 2D-BlockLDLQ, and QZ solvers verified.
+
+============================================================================================
+[STAGE: selftest:r39_extract_teacher_top128] <PYTHON> -u <PKG_ROOT>\claude_r39_qtip\build_r39\r39_extract_teacher_top128.py --selftest
+============================================================================================
+[SELFTEST PASSED] weights_only=True reload + Top-128+Tail simplex conservation verified (max_err=2.88e-04)!
+
+============================================================================================
+[STAGE: selftest:run_qtip_build_r39] <PYTHON> -u <PKG_ROOT>\claude_r39_qtip\build_r39\run_qtip_build_r39.py --selftest
+============================================================================================
+<PKG_ROOT>\claude_r39_qtip\build_r39\run_qtip_build_r39.py:40: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
+  --dst C:\models\GLM53-APEX-FOLD-R39-HYB \
+[SELFTEST] Verifying 42-layer streaming builder pipeline on NVIDIA GeForce RTX 5090...
+[SELFTEST PASSED] Archive (37976 B), popularity perm, 2D-BlockLDLQ, QZ H_down, NVRTC gate (cos=1.000000), and Stage-2B schema verified!
+
+============================================================================================
+[STAGE: selftest:r39_stage2b_global_kl_trainer] <PYTHON> -u <PKG_ROOT>\claude_r39_qtip\build_r39\r39_stage2b_global_kl_trainer.py --selftest
+============================================================================================
+<PKG_ROOT>\claude_r39_qtip\build_r39\r39_stage2b_global_kl_trainer.py:44: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
+  --backbone-dir C:\models\GLM53-backbone-r34h \
+[SELFTEST] Running end-to-end Stage-2B Layer-Major Global-KL verification on NVIDIA GeForce RTX 5090...
+  [INIT] Pre-FT Global Teacher KL = 0.18197 nats | top1 = 0.1165
+  [SWEEP 1] KL = 0.18197 nats | peak_VRAM = 0.024 GiB | d_router=0.00894 d_hyb=0.00383 d_scale=0.00400
+  [SWEEP 2] KL = 0.17571 nats | peak_VRAM = 0.024 GiB | d_router=0.01791 d_hyb=0.00748 d_scale=0.00733
+  [SWEEP 3] KL = 0.16908 nats | peak_VRAM = 0.024 GiB | d_router=0.02681 d_hyb=0.01103 d_scale=0.01023
+  [SWEEP 4] KL = 0.16208 nats | peak_VRAM = 0.024 GiB | d_router=0.03584 d_hyb=0.01447 d_scale=0.01276
+[SELFTEST PASSED] Global Teacher KL dropped 0.18197 -> 0.15575 nats (held-out KL=0.22911); exact 0-byte archive invariance verified (160156 B)!
+
+============================================================================================
+[STAGE: selftest:glm53_fold_qtip_runtime] <PYTHON> -u <PKG_ROOT>\claude_r39_qtip\runtime\glm53_fold_qtip_runtime.py --selftest
+============================================================================================
+<PKG_ROOT>\claude_r39_qtip\runtime\glm53_fold_qtip_runtime.py:39: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
+  --backbone-dir C:\models\GLM53-backbone-r34h \
+[SELFTEST] Testing QtipArchive + QtipPinnedSlotPool + CUDAGraph capture/replay on NVIDIA GeForce RTX 5090...
+  [GATE-1] Production slab byte locks verified: Rule A = 6,326,528 B | Rule GU125 = 6,064,384 B
+<PKG_ROOT>\claude_r39_qtip\runtime\glm53_fold_qtip_runtime.py:687: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\torch\csrc\utils\tensor_numpy.cpp:219.)
+  self.expert_slab_u8 = torch.from_numpy(mm)
+  [GATE-2] Prefill rotated-BF16 dense_core vs NVRTC slab GEMV cos = 0.999987
+[SELFTEST PASSED] CUDAGraph replay is 0.0-ULP bit-identical to eager decode with live pinned-pool DMA & prefetch!
+
+[PIPELINE COMPLETE] Profile 'r39_flagship_75gb_sub023' finished all requested stages (['selftests']). Ledger: <PKG_ROOT>\claude_r39_qtip\build_r39\out_r39\r39_ledger.tsv

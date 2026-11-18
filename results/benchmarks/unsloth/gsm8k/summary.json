@@ -1,0 +1,52 @@
+{
+ "harness": "bench_r39-1.0",
+ "task": "gsm8k",
+ "model": "unsloth",
+ "base_url": "http://127.0.0.1:8188/v1",
+ "written_utc": "2026-11-18T00:00:48Z",
+ "n_selected": 250,
+ "n_scored": 250,
+ "n_missing": 0,
+ "complete": true,
+ "n_correct": 239,
+ "score": 0.956,
+ "wilson95": [
+  0.92294,
+  0.97526
+ ],
+ "n_truncated": 0,
+ "n_truncated_but_otherwise_correct": 0,
+ "n_no_extractable_answer": 0,
+ "finish_reasons": {
+  "stop": 250
+ },
+ "mean_prompt_tokens": 131.46,
+ "mean_completion_tokens": 74.68,
+ "mean_wall_s": 11.935,
+ "mean_tok_s_wall": 5.915,
+ "mean_tok_s_reported": 12.941,
+ "total_completion_tokens": 18670,
+ "total_wall_s": 2983.86,
+ "aggregate_tok_s_wall": 6.257,
+ "request": {
+  "model": "unsloth",
+  "max_tokens": 1024,
+  "temperature": 0.0,
+  "stream": false,
+  "chat_template_kwargs": {
+   "reasoning_effort": "low",
+   "enable_thinking": false
+  },
+  "cache_prompt": false
+ },
+ "exec_timeout_s": null,
+ "data": {
+  "data_file": "gsm8k_test.jsonl",
+  "data_sha256": "f99a71f3d1f0c0155e6d4a331ff0090260dbca5126b30b3ae6f4823657c0167a",
+  "ids_file": "gsm8k_sample_250.json",
+  "ids_sha256": "5690f69e9fcc59bc98c0588ae838382b19f7b0abf07125d6a67c9dea61a16190",
+  "n_items": 250
+ },
+ "prompt_template_sha256": "074fce8fc4eb1c8d1582da26641e82a70e223956fbcbfb5cd4a247737f924269",
+ "truncated_counts_as": "wrong"
+}

@@ -1,0 +1,93 @@
+{
+  "source": {
+    "mode": "nested_r34_masks_u25_safe",
+    "masks_dir": "<ORIGINAL_PACKAGE_BUILD_DIR>/build_run/out_r32/r34_masks"
+  },
+  "masks": {
+    "hyb_P5_83GB.json": {
+      "description": "Round 3.9 Ultra-Low-KL (<0.22 nats) non-uniform 4.86% prune (83.10 GB)",
+      "format_target": "qtip_A",
+      "served_bytes_with_r34h": 83100634852,
+      "served_gb_decimal": 83.101,
+      "served_gib_binary": 77.393,
+      "source_mode": "nested_r34_masks_u25_safe",
+      "pruned_total": 588,
+      "kept_total": 11508,
+      "prune_pct": 4.861,
+      "per_layer_min": 4,
+      "per_layer_median": 15.0,
+      "per_layer_max": 19,
+      "early_L03_L07_mean": 12.8,
+      "mid_L12_L35_mean": 15.17,
+      "late_L40_L44_mean": 8.4
+    },
+    "tcq33_W16_75GB.json": {
+      "description": "Round 3.8 Control ~75.00 GB non-uniform 15.89% waterfill on TCQ33",
+      "format_target": "tcq33_A",
+      "served_bytes_with_r34h": 74994874046,
+      "served_gb_decimal": 74.995,
+      "served_gib_binary": 69.844,
+      "source_mode": "nested_r34_masks_u25_safe",
+      "pruned_total": 1922,
+      "kept_total": 10174,
+      "prune_pct": 15.89,
+      "per_layer_min": 27,
+      "per_layer_median": 47.5,
+      "per_layer_max": 54,
+      "early_L03_L07_mean": 44.2,
+      "mid_L12_L35_mean": 47.67,
+      "late_L40_L44_mean": 36.0
+    },
+    "hyb_W16_75GB.json": {
+      "description": "Round 3.9 Flagship <0.23 KL / 74.66 GB non-uniform 15.89% waterfill on QTIP Rule A",
+      "format_target": "qtip_A",
+      "served_bytes_with_r34h": 74661046500,
+      "served_gb_decimal": 74.661,
+      "served_gib_binary": 69.534,
+      "source_mode": "nested_r34_masks_u25_safe",
+      "pruned_total": 1922,
+      "kept_total": 10174,
+      "prune_pct": 15.89,
+      "per_layer_min": 27,
+      "per_layer_median": 47.5,
+      "per_layer_max": 54,
+      "early_L03_L07_mean": 44.2,
+      "mid_L12_L35_mean": 47.67,
+      "late_L40_L44_mean": 36.0
+    },
+    "hyb_W20_71GB.json": {
+      "description": "Round 3.9 High-Compression 71.43 GB non-uniform 20.11% waterfill on QTIP Rule A",
+      "format_target": "qtip_A",
+      "served_bytes_with_r34h": 71434517220,
+      "served_gb_decimal": 71.435,
+      "served_gib_binary": 66.529,
+      "source_mode": "nested_r34_masks_u25_safe",
+      "pruned_total": 2432,
+      "kept_total": 9664,
+      "prune_pct": 20.106,
+      "per_layer_min": 41,
+      "per_layer_median": 58.0,
+      "per_layer_max": 64,
+      "early_L03_L07_mean": 55.4,
+      "mid_L12_L35_mean": 58.67,
+      "late_L40_L44_mean": 53.6
+    },
+    "hyb_GU125_69GB.json": {
+      "description": "Round 3.9 Sub-70 GB (69.97 GB, or 68.90 GB at W20) waterfill on QTIP Rule GU125",
+      "format_target": "qtip_GU125",
+      "served_bytes_with_r34h": 69968489188,
+      "served_gb_decimal": 69.968,
+      "served_gib_binary": 65.163,
+      "source_mode": "nested_r34_masks_u25_safe",
+      "pruned_total": 2256,
+      "kept_total": 9840,
+      "prune_pct": 18.651,
+      "per_layer_min": 35,
+      "per_layer_median": 55.0,
+      "per_layer_max": 62,
+      "early_L03_L07_mean": 52.0,
+      "mid_L12_L35_mean": 55.46,
+      "late_L40_L44_mean": 44.4
+    }
+  }
+}

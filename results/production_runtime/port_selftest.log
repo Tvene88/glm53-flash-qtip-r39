@@ -1,0 +1,25 @@
+START 2026-11-17 09:50:11 step selftest
+--- shipped selftest 09:50:17 | R37_GPU_WINDOW=1
+[SELFTEST] Testing QtipArchive + QtipPinnedSlotPool + CUDAGraph capture/replay on NVIDIA GeForce RTX 5090...
+  [GATE-1] Production slab byte locks verified: Rule A = 6,326,528 B | Rule GU125 = 6,064,384 B
+  [GATE-2] Prefill rotated-BF16 dense_core vs NVRTC slab GEMV cos = 0.999987
+[SELFTEST PASSED] CUDAGraph replay is 0.0-ULP bit-identical to eager decode with live pinned-pool DMA & prefetch!
+exit=0 09:50:22
+--- port selftest, flags off 09:50:28 | R37_GPU_WINDOW=1
+[SELFTEST-PORT] Round 3.9S port checks on NVIDIA GeForce RTX 5090...
+  [P1] decode_core(pair_output=True) + reduction == decode_core(): 0.0
+  [P2] slot -1 -> zero pair, the other pair unchanged: 0.0
+  [P3] routed id -1 == zero-weight duplicate: 0.0
+  [P4] reg_topk gate: unscored list kept (3 of 3), scored list queued 1 of 2 (rank-1 expert registered: True; registered layers: 2)
+  [P5] pool v6 on QTIP sidecars: eager == QTIP pool and graph == eager over 5 expert sets: 0.0 (registered layers 2, hits 16, misses 6; flags: a_signal=0 b_demand=0 b2_stream=0 c_gather=mmap d_evict=lru e_topk=0 e_margin=0)
+[SELFTEST-PORT PASSED] pair_output, masked pairs, routed -1, reg_topk gate and pool v6 are bit-exact / as specified.
+exit=0 09:50:31
+--- port selftest, production flags 09:50:37 | R32_POOL=6 R33_REGISTER_GIB=68 R33_REGISTER_MODE=rows R35_POOL_COLD_MARGIN=0.01 R35_POOL_COLD_TOPK=6 R35_POOL_DEMAND=1 R35_POOL_DEMAND_STREAM=1 R35_POOL_EVICT=gdsf R35_POOL_GATHER=readfile R35_POOL_SIGNAL=1 R36_FP8_GEMV=v2 R36_FUSE_MHC=1 R37_GPU_WINDOW=1 R37_POOL_REG_TOPK=6 R37_TCQ_GX=32 R37_TCQ_KERNEL=e_sh16 R37_TCQ_WARPS=16
+[SELFTEST-PORT] Round 3.9S port checks on NVIDIA GeForce RTX 5090...
+  [P1] decode_core(pair_output=True) + reduction == decode_core(): 0.0
+  [P2] slot -1 -> zero pair, the other pair unchanged: 0.0
+  [P3] routed id -1 == zero-weight duplicate: 0.0
+  [P4] reg_topk gate: unscored list kept (3 of 3), scored list queued 1 of 2 (rank-1 expert registered: True; registered layers: 2)
+  [P5] pool v6 on QTIP sidecars: eager == QTIP pool and graph == eager over 5 expert sets: 0.0 (registered layers 2, hits 16, misses 6; flags: a_signal=1 b_demand=1 b2_stream=1 c_gather=readfile d_evict=gdsf e_topk=6 e_margin=0.01 r_topk=6 r_margin=0)
+[SELFTEST-PORT PASSED] pair_output, masked pairs, routed -1, reg_topk gate and pool v6 are bit-exact / as specified.
+exit=0 09:50:40

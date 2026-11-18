@@ -1,0 +1,43 @@
+
+============================================================================================
+[STAGE: selftest:r39_l27_qtip_2d_ldlq_lab] <PYTHON> -u <PKG_ROOT>\claude_r39_qtip\build_r39\r39_l27_qtip_2d_ldlq_lab.py --selftest
+============================================================================================
+[SELFTEST] Device: NVIDIA GeForce RTX 5090
+Traceback (most recent call last):
+  File "<PKG_ROOT>\claude_r39_qtip\build_r39\r39_l27_qtip_2d_ldlq_lab.py", line 1817, in <module>
+    main()
+    ~~~~^^
+  File "<PKG_ROOT>\claude_r39_qtip\build_r39\r39_l27_qtip_2d_ldlq_lab.py", line 1594, in main
+    run_selftest()
+    ~~~~~~~~~~~~^^
+  File "<PKG_ROOT>\claude_r39_qtip\build_r39\r39_l27_qtip_2d_ldlq_lab.py", line 1489, in run_selftest
+    hyb_base = train_hyb_codebooks_l16_v2(dev, cache_path=None, n_rows=256, Nw=256, iters=10)
+  File "C:\Python314\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "<PKG_ROOT>\claude_r39_qtip\build_r39\r39_l27_qtip_2d_ldlq_lab.py", line 791, in train_hyb_codebooks_l16_v2
+    st = viterbi_qtip_tailbite_cuda(X, k=k, mode="hyb", hyb_lut_fp16=lut)
+  File "C:\Python314\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "<PKG_ROOT>\claude_r39_qtip\build_r39\r39_l27_qtip_2d_ldlq_lab.py", line 712, in viterbi_qtip_tailbite_cuda
+    kern(
+    ~~~~^
+        grid=(B, 1, 1),
+        ^^^^^^^^^^^^^^^
+    ...<13 lines>...
+        ],
+        ^^
+    )
+    ^
+  File "C:\Python314\Lib\site-packages\torch\cuda\_utils.py", line 412, in __call__
+    _check_cuda(
+    ~~~~~~~~~~~^
+        libcuda.cuLaunchKernel(
+        ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+        )
+        ^
+    )
+    ^
+  File "C:\Python314\Lib\site-packages\torch\cuda\_utils.py", line 59, in _check_cuda
+    raise RuntimeError(f"CUDA error: {error_message}")
+RuntimeError: CUDA error: too many resources requested for launch

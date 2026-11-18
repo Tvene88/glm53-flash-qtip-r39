@@ -1,0 +1,36 @@
+START 2026-11-17 06:45:10 Phase 8 official qbench gate + speed, QTIP W16 untuned, pool 16 GiB, register 42 GiB, no POOL_REG_TOPK, prefix cache off, evx=C:\models\GLM53-APEX-FOLD-TCQ33\_r33_ckpt\evx.pt exists=True
+[r39-ready] Loaded 42 QTIP HYB layers (qtip_hyb_A_custom, 6326528 B/row), patched_routers=0, pool=2715 VRAM slots (16.0 GiB) + 41.8 GiB cudaHostRegister DDR5, graphs=True, mtp=False in 66.0s
+[eval-r39] runner loaded in 67s; VRAM free 3.62 of 31.82 GiB
+[eval-r39] row qb0    | n_exact=2037 | kl=0.17430
+[eval-r39] row qb1    | n_exact=1682 | kl=0.15052
+[eval-r39] row qb2    | n_exact= 996 | kl=0.20726
+[eval-r39] row qb3    | n_exact= 342 | kl=1.31328
+[eval-r39] row qb4    | n_exact=1128 | kl=0.38107
+[eval-r39] row qb5    | n_exact=2037 | kl=0.19440
+[eval-r39] row qb6    | n_exact= 351 | kl=1.46454
+[eval-r39] row qb7    | n_exact=1005 | kl=0.13684
+[eval-r39] row qb8    | n_exact=2037 | kl=0.17781
+[eval-r39] row qb9    | n_exact=1528 | kl=0.07596
+[eval-r39] row qb10   | n_exact= 555 | kl=0.99627
+[eval-r39] row qb11   | n_exact=1380 | kl=0.28711
+[eval-r39] row qb12   | n_exact= 814 | kl=0.38867
+[eval-r39] row qb13   | n_exact= 301 | kl=0.98162
+[eval-r39] row qb14   | n_exact=2037 | kl=0.17698
+[eval-r39] row qb15   | n_exact=2037 | kl=0.12833
+[eval-r39] row qb16   | n_exact=1385 | kl=0.16093
+[eval-r39] row qb17   | n_exact= 746 | kl=1.13379
+[eval-r39] row qb18   | n_exact=2037 | kl=0.38923
+[eval-r39] row qb19   | n_exact=2037 | kl=0.21890
+[eval-r39] row qb20   | n_exact= 403 | kl=1.23792
+[eval-r39] row qb21   | n_exact=2037 | kl=0.10215
+[eval-r39] row qb22   | n_exact=2037 | kl=0.19010
+[eval-r39] row qb23   | n_exact=2037 | kl=0.07167
+[eval-r39] row qb24   | n_exact= 871 | kl=0.97560
+[eval-r39] row qb25   | n_exact=2037 | kl=0.35935
+[eval-r39] row qb26   | n_exact=1339 | kl=0.29424
+[eval-r39] row qb27   | n_exact= 572 | kl=0.83864
+[eval-r39] row qb28   | n_exact=2037 | kl=0.17698
+[eval-r39] speed gate: VRAM free 3.45 of 31.82 GiB
+[EVAL SUMMARY] {"kl": 0.295316, "top1": 0.83658, "positions": 39842, "rows": 29, "pass_kl_budget": false}
+[SPEED SUMMARY] {"rounds": 3, "max_new_tokens": 128, "per_prompt_mean_tok_s": {"code": 14.909, "capital": 18.25, "math": 15.543, "systems": 17.635}, "overall_mean_tok_s": 16.584, "pass_18_tok_s_gate": false, "vram_free_gib_before": 3.45, "env": {"R37_GPU_WINDOW": "1"}}
+exit=0 07:30:34

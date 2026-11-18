@@ -1,0 +1,1 @@
+{"model": "preflight", "max_tokens": 16, "temperature": 0, "stream": false, "cache_prompt": false, "chat_template_kwargs": {"reasoning_effort": "low", "enable_thinking": false}, "messages": [{"role": "user", "content": "PROMPT"}]}

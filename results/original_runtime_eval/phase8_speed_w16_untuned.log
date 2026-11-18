@@ -1,0 +1,10 @@
+START 2026-11-17 06:26:57 Phase 8 speed-only, QTIP W16 untuned, pool 18 GiB, register 42 GiB, no POOL_REG_TOPK, prefix cache off
+Quality row coverage incomplete: {'groups': {'qb': 29}, 'unique_ids': True, 'positions': {'qb': 39842}, 'complete': False}
+exit=1 06:26:57
+START 2026-11-17 06:27:15 Phase 8 speed-only (with --qbench-only for the row check), QTIP W16 untuned, pool 18 GiB, register 42 GiB, no POOL_REG_TOPK, prefix cache off
+[r39-ready] Loaded 42 QTIP HYB layers (qtip_hyb_A_custom, 6326528 B/row), patched_routers=0, pool=3054 VRAM slots (18.0 GiB) + 41.8 GiB cudaHostRegister DDR5, graphs=True, mtp=False in 875.0s
+[eval-r39] runner loaded in 876s; VRAM free 1.63 of 31.82 GiB
+[eval-r39] speed gate: VRAM free 1.63 of 31.82 GiB
+[EVAL SUMMARY] {"kl": 0.0, "top1": 0.0, "positions": 0, "rows": 0, "pass_kl_budget": true}
+[SPEED SUMMARY] {"rounds": 3, "max_new_tokens": 128, "per_prompt_mean_tok_s": {"code": 14.18, "capital": 18.051, "math": 15.641, "systems": 17.964}, "overall_mean_tok_s": 16.459, "pass_18_tok_s_gate": false, "vram_free_gib_before": 1.63, "env": {"R37_GPU_WINDOW": "1"}}
+exit=0 06:44:35

@@ -1,0 +1,5 @@
+START 20:43:08 power cap 450.00 W gpu used 83 MiB
+[L27] Loaded 288 exact experts + 40161 'qb' tokens (40103 scored content tokens) in 18.2s
+[CODEBOOK GATE] Held-out N(0,1) k=2 SNR: QTIP L=16 mul1 = 11.484 dB | QTIP L=16 HYB = 11.539 dB
+[RESULT] TCQ33_A_best                  : {"content_snr_db": 9.188, "norm_ratio": 0.9824, "cos": 0.9388, "bpw": 2.0216, "weight_snr_db": {"g": 10.266, "u": 10.238, "d": 11.082}, "seconds": 441.3}
+exit=-1 elapsed=1565s end 21:09:13

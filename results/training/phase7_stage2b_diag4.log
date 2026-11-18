@@ -1,0 +1,9 @@
+START 2026-11-17 02:48:24 diagnostic: 4 seqs, 1 macro-step, window 4
+[STAGE-2B] Archive format='qtip_hyb' from C:/models/GLM53-APEX-FOLD-R39-HYB-W16 | Backbone=C:/models/GLM53-backbone
+[DATA] Packed 4 train seqs + 29 qbench seqs (S=2048)
+[TEACHER] Loaded cached Top-128+Tail teacher targets from C:/models/r39_teacher_top128/train_cal_top128.pt
+[EVAL 0] Initial qbench KL = 3.83730 nats | top1 = 0.5971
+[EVAL 0] qbench KL = 3.83730 nats | top1 = 0.5971 | real positions only: KL = 0.29058, top1 = 0.8371 (39871 tok) | 169s
+    [A done 65s] 11 window checkpoints 2.8 GiB, h (1, 2048, 4, 4096) torch.bfloat16 | RSS 82.0 private 101.6 RAM-free 32.4 GiB | VRAM alloc 2.5 peak 20.5 reserved 27.0 dev-free 3.1 GiB
+    [B done 0s] RSS 82.2 private 81.0 RAM-free 32.3 GiB | VRAM alloc 2.4 peak 2.4 reserved 5.9 dev-free 24.2 GiB
+exit=-1 end 03:04:38

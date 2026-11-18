@@ -1,0 +1,122 @@
+START 2026-11-17 08:49:42 trainer self-tests after fix 12
+=== shipped order (regression) ===
+[SELFTEST] Running end-to-end Stage-2B Layer-Major Global-KL verification on NVIDIA GeForce RTX 5090...
+  [INIT] Pre-FT Global Teacher KL = 0.18197 nats | top1 = 0.1165
+  [PHASES] A forward 0s (peak 0.0 GiB) | B head 0s | C reverse windows 0s (peak 0.0 GiB)
+  [SWEEP 1] KL = 0.18197 nats | peak_VRAM = 0.025 GiB | d_router=0.00861 d_hyb=0.00383 d_scale=0.00400
+  [PHASES] A forward 0s (peak 0.0 GiB) | B head 0s | C reverse windows 0s (peak 0.0 GiB)
+  [SWEEP 2] KL = 0.17700 nats | peak_VRAM = 0.025 GiB | d_router=0.01685 d_hyb=0.00749 d_scale=0.00734
+  [PHASES] A forward 0s (peak 0.0 GiB) | B head 0s | C reverse windows 0s (peak 0.0 GiB)
+  [SWEEP 3] KL = 0.17264 nats | peak_VRAM = 0.025 GiB | d_router=0.02533 d_hyb=0.01110 d_scale=0.01031
+  [PHASES] A forward 0s (peak 0.0 GiB) | B head 0s | C reverse windows 0s (peak 0.0 GiB)
+  [SWEEP 4] KL = 0.16820 nats | peak_VRAM = 0.025 GiB | d_router=0.03399 d_hyb=0.01464 d_scale=0.01298
+[SELFTEST PASSED] Global Teacher KL dropped 0.18197 -> 0.16463 nats (held-out KL=0.23272); exact 0-byte archive invariance verified (160156 B)!
+exit=0
+=== gradcmp LoRA ===
+[SELFTEST] Running end-to-end Stage-2B Layer-Major Global-KL verification on NVIDIA GeForce RTX 5090...
+  [INIT] Pre-FT Global Teacher KL = 0.18197 nats | top1 = 0.1165
+    [chunk 0:4] A 0s B 0s C 0s | running train KL 0.18660 | RSS 1.8 private 3.3 RAM-free 109.7 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+    [chunk 4:8] A 0s B 0s C 0s | running train KL 0.18197 | RSS 1.8 private 3.3 RAM-free 109.7 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+    [chunk 0:4] A 0s B 0s C 0s | running train KL 0.18660 | RSS 1.9 private 3.3 RAM-free 109.7 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+    [chunk 4:8] A 0s B 0s C 0s | running train KL 0.18197 | RSS 1.9 private 3.3 RAM-free 109.7 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+  [GRADCMP] train KL compressed 0.181975 | dense 0.181975
+  [GRADCMP] router 2.delta_gate_b: |a|=7.2573e-03 |b|=7.2656e-03 rel_err=1.283e-03 cos=1.000000
+  [GRADCMP] router 2.lora_A: both zero
+  [GRADCMP] router 2.lora_B: |a|=6.0437e-03 |b|=6.0436e-03 rel_err=1.075e-03 cos=0.999999
+  [GRADCMP] router 3.delta_gate_b: |a|=4.3461e-03 |b|=4.3481e-03 rel_err=1.063e-03 cos=1.000000
+  [GRADCMP] router 3.lora_A: both zero
+  [GRADCMP] router 3.lora_B: |a|=4.4684e-03 |b|=4.4685e-03 rel_err=7.149e-04 cos=1.000000
+  [GRADCMP] router 4.delta_gate_b: |a|=3.0569e-03 |b|=3.0575e-03 rel_err=5.441e-04 cos=1.000000
+  [GRADCMP] router 4.lora_A: both zero
+  [GRADCMP] router 4.lora_B: |a|=3.5853e-03 |b|=3.5847e-03 rel_err=5.283e-04 cos=1.000000
+  [GRADCMP] router 5.delta_gate_b: |a|=6.7364e-03 |b|=6.7364e-03 rel_err=3.563e-08 cos=1.000000
+  [GRADCMP] router 5.lora_A: both zero
+  [GRADCMP] router 5.lora_B: |a|=4.6730e-03 |b|=4.6730e-03 rel_err=9.011e-08 cos=1.000000
+  [GRADCMP] log-scale L2 g: |a|=4.1238e-03 |b|=4.1233e-03 rel_err=2.383e-03 cos=0.999997
+  [GRADCMP] log-scale L2 u: |a|=3.2803e-03 |b|=3.2819e-03 rel_err=2.669e-03 cos=0.999997
+  [GRADCMP] log-scale L2 d: |a|=2.5942e-03 |b|=2.5945e-03 rel_err=2.936e-03 cos=0.999996
+  [GRADCMP] log-scale L3 g: |a|=2.9018e-03 |b|=2.8998e-03 rel_err=2.482e-03 cos=0.999997
+  [GRADCMP] log-scale L3 u: |a|=2.3933e-03 |b|=2.3930e-03 rel_err=2.949e-03 cos=0.999996
+  [GRADCMP] log-scale L3 d: |a|=2.3328e-03 |b|=2.3324e-03 rel_err=2.694e-03 cos=0.999996
+  [GRADCMP] log-scale L4 g: |a|=2.2584e-03 |b|=2.2580e-03 rel_err=1.984e-03 cos=0.999998
+  [GRADCMP] log-scale L4 u: |a|=1.8406e-03 |b|=1.8420e-03 rel_err=2.589e-03 cos=0.999997
+  [GRADCMP] log-scale L4 d: |a|=1.6680e-03 |b|=1.6674e-03 rel_err=2.607e-03 cos=0.999997
+  [GRADCMP] log-scale L5 g: |a|=2.0284e-03 |b|=2.0294e-03 rel_err=2.017e-03 cos=0.999998
+  [GRADCMP] log-scale L5 u: |a|=1.6973e-03 |b|=1.6983e-03 rel_err=2.273e-03 cos=0.999998
+  [GRADCMP] log-scale L5 d: |a|=1.6380e-03 |b|=1.6384e-03 rel_err=2.154e-03 cos=0.999998
+[GRADCMP PASSED] worst cosine 0.999996
+exit=0
+=== gradcmp full gate ===
+[SELFTEST] Running end-to-end Stage-2B Layer-Major Global-KL verification on NVIDIA GeForce RTX 5090...
+  [INIT] Pre-FT Global Teacher KL = 0.18197 nats | top1 = 0.1165
+    [chunk 0:4] A 0s B 0s C 0s | running train KL 0.18660 | RSS 1.8 private 3.3 RAM-free 109.7 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+    [chunk 4:8] A 0s B 0s C 0s | running train KL 0.18197 | RSS 1.8 private 3.3 RAM-free 109.7 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+    [chunk 0:4] A 0s B 0s C 0s | running train KL 0.18660 | RSS 1.9 private 3.3 RAM-free 109.7 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+    [chunk 4:8] A 0s B 0s C 0s | running train KL 0.18197 | RSS 1.9 private 3.3 RAM-free 109.7 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+  [GRADCMP] train KL compressed 0.181975 | dense 0.181975
+  [GRADCMP] router 2.delta_gate_b: |a|=7.2573e-03 |b|=7.2656e-03 rel_err=1.283e-03 cos=1.000000
+  [GRADCMP] router 2.delta_w: |a|=1.3547e-02 |b|=1.3551e-02 rel_err=1.363e-03 cos=0.999999
+  [GRADCMP] router 3.delta_gate_b: |a|=4.3461e-03 |b|=4.3481e-03 rel_err=1.063e-03 cos=1.000000
+  [GRADCMP] router 3.delta_w: |a|=1.0294e-02 |b|=1.0293e-02 rel_err=6.752e-04 cos=1.000000
+  [GRADCMP] router 4.delta_gate_b: |a|=3.0569e-03 |b|=3.0575e-03 rel_err=5.441e-04 cos=1.000000
+  [GRADCMP] router 4.delta_w: |a|=8.3175e-03 |b|=8.3167e-03 rel_err=4.615e-04 cos=1.000000
+  [GRADCMP] router 5.delta_gate_b: |a|=6.7364e-03 |b|=6.7364e-03 rel_err=3.563e-08 cos=1.000000
+  [GRADCMP] router 5.delta_w: |a|=1.0533e-02 |b|=1.0533e-02 rel_err=1.309e-07 cos=1.000000
+  [GRADCMP] log-scale L2 g: |a|=4.1238e-03 |b|=4.1233e-03 rel_err=2.383e-03 cos=0.999997
+  [GRADCMP] log-scale L2 u: |a|=3.2803e-03 |b|=3.2819e-03 rel_err=2.669e-03 cos=0.999997
+  [GRADCMP] log-scale L2 d: |a|=2.5942e-03 |b|=2.5945e-03 rel_err=2.936e-03 cos=0.999996
+  [GRADCMP] log-scale L3 g: |a|=2.9018e-03 |b|=2.8998e-03 rel_err=2.482e-03 cos=0.999997
+  [GRADCMP] log-scale L3 u: |a|=2.3933e-03 |b|=2.3930e-03 rel_err=2.949e-03 cos=0.999996
+  [GRADCMP] log-scale L3 d: |a|=2.3328e-03 |b|=2.3324e-03 rel_err=2.694e-03 cos=0.999996
+  [GRADCMP] log-scale L4 g: |a|=2.2584e-03 |b|=2.2580e-03 rel_err=1.984e-03 cos=0.999998
+  [GRADCMP] log-scale L4 u: |a|=1.8406e-03 |b|=1.8420e-03 rel_err=2.589e-03 cos=0.999997
+  [GRADCMP] log-scale L4 d: |a|=1.6680e-03 |b|=1.6674e-03 rel_err=2.607e-03 cos=0.999997
+  [GRADCMP] log-scale L5 g: |a|=2.0284e-03 |b|=2.0294e-03 rel_err=2.017e-03 cos=0.999998
+  [GRADCMP] log-scale L5 u: |a|=1.6973e-03 |b|=1.6983e-03 rel_err=2.273e-03 cos=0.999998
+  [GRADCMP] log-scale L5 d: |a|=1.6380e-03 |b|=1.6384e-03 rel_err=2.154e-03 cos=0.999998
+[GRADCMP PASSED] worst cosine 0.999996
+exit=0
+=== dense train, LoRA, scales on ===
+[SELFTEST] Running end-to-end Stage-2B Layer-Major Global-KL verification on NVIDIA GeForce RTX 5090...
+  [INIT] Pre-FT Global Teacher KL = 0.18197 nats | top1 = 0.1165
+  [TEST] dense reverse path, train_scales=True
+    [chunk 0:4] A 0s B 0s C 0s | running train KL 0.18660 | RSS 1.9 private 3.4 RAM-free 109.6 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+    [chunk 4:8] A 0s B 0s C 0s | running train KL 0.18197 | RSS 1.9 private 3.4 RAM-free 109.6 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+  [PHASES] A forward 0s (peak 0.0 GiB) | B head 0s | C reverse windows 0s (peak 0.0 GiB)
+  [SWEEP 1] KL = 0.18197 nats | peak_VRAM = 0.022 GiB | d_router=0.00842 d_hyb=0.00000 d_scale=0.00400
+    [chunk 0:4] A 0s B 0s C 0s | running train KL 0.18482 | RSS 2.0 private 3.5 RAM-free 109.5 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+    [chunk 4:8] A 0s B 0s C 0s | running train KL 0.18017 | RSS 2.0 private 3.5 RAM-free 109.5 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+  [PHASES] A forward 0s (peak 0.0 GiB) | B head 0s | C reverse windows 0s (peak 0.0 GiB)
+  [SWEEP 2] KL = 0.18017 nats | peak_VRAM = 0.023 GiB | d_router=0.01636 d_hyb=0.00000 d_scale=0.00735
+    [chunk 0:4] A 0s B 0s C 0s | running train KL 0.18147 | RSS 2.0 private 3.5 RAM-free 109.5 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+    [chunk 4:8] A 0s B 0s C 0s | running train KL 0.17746 | RSS 2.0 private 3.5 RAM-free 109.5 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+  [PHASES] A forward 0s (peak 0.0 GiB) | B head 0s | C reverse windows 0s (peak 0.0 GiB)
+  [SWEEP 3] KL = 0.17746 nats | peak_VRAM = 0.023 GiB | d_router=0.02464 d_hyb=0.00000 d_scale=0.01036
+    [chunk 0:4] A 0s B 0s C 0s | running train KL 0.17999 | RSS 2.0 private 3.5 RAM-free 109.5 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+    [chunk 4:8] A 0s B 0s C 0s | running train KL 0.17572 | RSS 2.0 private 3.5 RAM-free 109.5 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+  [PHASES] A forward 0s (peak 0.0 GiB) | B head 0s | C reverse windows 0s (peak 0.0 GiB)
+  [SWEEP 4] KL = 0.17572 nats | peak_VRAM = 0.023 GiB | d_router=0.03328 d_hyb=0.00000 d_scale=0.01312
+[SELFTEST PASSED] Global Teacher KL dropped 0.18197 -> 0.17429 nats (held-out KL=0.23556); exact 0-byte archive invariance verified (160156 B)!
+exit=0
+=== dense train, full gate, scales frozen ===
+[SELFTEST] Running end-to-end Stage-2B Layer-Major Global-KL verification on NVIDIA GeForce RTX 5090...
+  [INIT] Pre-FT Global Teacher KL = 0.18197 nats | top1 = 0.1165
+  [TEST] dense reverse path, train_scales=False
+    [chunk 0:4] A 0s B 0s C 0s | running train KL 0.18660 | RSS 1.9 private 3.4 RAM-free 109.7 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+    [chunk 4:8] A 0s B 0s C 0s | running train KL 0.18197 | RSS 1.9 private 3.4 RAM-free 109.7 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+  [PHASES] A forward 0s (peak 0.0 GiB) | B head 0s | C reverse windows 0s (peak 0.0 GiB)
+  [SWEEP 1] KL = 0.18197 nats | peak_VRAM = 0.022 GiB | d_router=0.02064 d_hyb=0.00000 d_scale=0.00000
+    [chunk 0:4] A 0s B 0s C 0s | running train KL 0.18386 | RSS 2.0 private 3.5 RAM-free 109.5 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+    [chunk 4:8] A 0s B 0s C 0s | running train KL 0.17932 | RSS 2.0 private 3.5 RAM-free 109.5 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+  [PHASES] A forward 0s (peak 0.0 GiB) | B head 0s | C reverse windows 0s (peak 0.0 GiB)
+  [SWEEP 2] KL = 0.17932 nats | peak_VRAM = 0.023 GiB | d_router=0.03893 d_hyb=0.00000 d_scale=0.00000
+    [chunk 0:4] A 0s B 0s C 0s | running train KL 0.18176 | RSS 2.0 private 3.5 RAM-free 109.5 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+    [chunk 4:8] A 0s B 0s C 0s | running train KL 0.17730 | RSS 2.0 private 3.5 RAM-free 109.5 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+  [PHASES] A forward 0s (peak 0.0 GiB) | B head 0s | C reverse windows 0s (peak 0.0 GiB)
+  [SWEEP 3] KL = 0.17730 nats | peak_VRAM = 0.023 GiB | d_router=0.05649 d_hyb=0.00000 d_scale=0.00000
+    [chunk 0:4] A 0s B 0s C 0s | running train KL 0.17965 | RSS 2.0 private 3.5 RAM-free 109.5 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+    [chunk 4:8] A 0s B 0s C 0s | running train KL 0.17572 | RSS 2.0 private 3.5 RAM-free 109.5 GiB | VRAM alloc 0.0 peak 0.0 reserved 0.0 dev-free 30.1 GiB
+  [PHASES] A forward 0s (peak 0.0 GiB) | B head 0s | C reverse windows 0s (peak 0.0 GiB)
+  [SWEEP 4] KL = 0.17572 nats | peak_VRAM = 0.023 GiB | d_router=0.07347 d_hyb=0.00000 d_scale=0.00000
+[SELFTEST PASSED] Global Teacher KL dropped 0.18197 -> 0.17388 nats (held-out KL=0.23363); exact 0-byte archive invariance verified (160156 B)!
+exit=0

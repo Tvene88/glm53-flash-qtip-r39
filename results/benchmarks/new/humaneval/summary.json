@@ -1,0 +1,52 @@
+{
+ "harness": "bench_r39-1.0",
+ "task": "humaneval",
+ "model": "new",
+ "base_url": "http://127.0.0.1:8188/v1",
+ "written_utc": "2026-11-17T21:47:17Z",
+ "n_selected": 164,
+ "n_scored": 164,
+ "n_missing": 0,
+ "complete": true,
+ "n_correct": 154,
+ "score": 0.93902,
+ "wilson95": [
+  0.89141,
+  0.96655
+ ],
+ "n_truncated": 0,
+ "n_truncated_but_otherwise_correct": 0,
+ "n_no_extractable_answer": 0,
+ "finish_reasons": {
+  "stop": 164
+ },
+ "mean_prompt_tokens": 184.549,
+ "mean_completion_tokens": 177.122,
+ "mean_wall_s": 10.888,
+ "mean_tok_s_wall": 15.809,
+ "mean_tok_s_reported": 20.968,
+ "total_completion_tokens": 29048,
+ "total_wall_s": 1785.67,
+ "aggregate_tok_s_wall": 16.267,
+ "request": {
+  "model": "new",
+  "max_tokens": 1024,
+  "temperature": 0.0,
+  "stream": false,
+  "chat_template_kwargs": {
+   "reasoning_effort": "low",
+   "enable_thinking": false
+  },
+  "cache_prompt": false
+ },
+ "exec_timeout_s": 30.0,
+ "data": {
+  "data_file": "humaneval.jsonl",
+  "data_sha256": "b19293e42932e70278b8e5ed83f8c82879cf34e0d3a44cc580f060b7cdaba4f8",
+  "ids_file": "humaneval_order.json",
+  "ids_sha256": "9ec52aae1e0f83abe0c772152e779e0b951e7e54a0efdfea99e9c30d780c61ba",
+  "n_items": 164
+ },
+ "prompt_template_sha256": "35532a8fe880e0dbf0e80dc6f1ad7c18c06c368d8c174a1812210a8233f239e6",
+ "truncated_counts_as": "wrong"
+}

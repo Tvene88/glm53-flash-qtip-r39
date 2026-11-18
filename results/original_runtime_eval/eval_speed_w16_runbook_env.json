@@ -1,0 +1,122 @@
+{
+  "runner_mode": "qtip",
+  "fold_dir": "C:\\models\\GLM53-APEX-FOLD-R39-HYB-W16",
+  "backbone_dir": "C:\\models\\GLM53-backbone-r34h",
+  "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "chunk": 1,
+  "execution": "graph_n1",
+  "coverage": {
+    "groups": {
+      "qb": 29
+    },
+    "unique_ids": true,
+    "positions": {
+      "qb": 39842
+    },
+    "complete": false
+  },
+  "kl_budget": 0.23,
+  "rows": [],
+  "qbench": {
+    "kl": 0.0,
+    "top1": 0.0,
+    "positions": 0,
+    "rows": 0,
+    "pass_kl_budget": true
+  },
+  "domains": {},
+  "speed_gate": {
+    "rounds": 3,
+    "max_new_tokens": 128,
+    "per_prompt_mean_tok_s": {
+      "code": 13.846,
+      "capital": 17.694,
+      "math": 15.431,
+      "systems": 17.305
+    },
+    "overall_mean_tok_s": 16.069,
+    "pass_18_tok_s_gate": false,
+    "runs": [
+      {
+        "round": 1,
+        "prompt": "code",
+        "tok_s": 11.805,
+        "hit_rate": 0.5919
+      },
+      {
+        "round": 1,
+        "prompt": "capital",
+        "tok_s": 16.9,
+        "hit_rate": 0.6895
+      },
+      {
+        "round": 1,
+        "prompt": "math",
+        "tok_s": 15.085,
+        "hit_rate": 0.7065
+      },
+      {
+        "round": 1,
+        "prompt": "systems",
+        "tok_s": 17.162,
+        "hit_rate": 0.7262
+      },
+      {
+        "round": 2,
+        "prompt": "code",
+        "tok_s": 14.864,
+        "hit_rate": 0.7263
+      },
+      {
+        "round": 2,
+        "prompt": "capital",
+        "tok_s": 18.087,
+        "hit_rate": 0.7406
+      },
+      {
+        "round": 2,
+        "prompt": "math",
+        "tok_s": 15.605,
+        "hit_rate": 0.7413
+      },
+      {
+        "round": 2,
+        "prompt": "systems",
+        "tok_s": 17.38,
+        "hit_rate": 0.7473
+      },
+      {
+        "round": 3,
+        "prompt": "code",
+        "tok_s": 14.87,
+        "hit_rate": 0.745
+      },
+      {
+        "round": 3,
+        "prompt": "capital",
+        "tok_s": 18.095,
+        "hit_rate": 0.752
+      },
+      {
+        "round": 3,
+        "prompt": "math",
+        "tok_s": 15.604,
+        "hit_rate": 0.7514
+      },
+      {
+        "round": 3,
+        "prompt": "systems",
+        "tok_s": 17.372,
+        "hit_rate": 0.7546
+      }
+    ],
+    "vram_free_gib_before": 1.63,
+    "env": {
+      "R36_FP8_GEMV": "v2",
+      "R36_FUSE_MHC": "1",
+      "R37_GPU_WINDOW": "1",
+      "R37_POOL_REG_TOPK": "6"
+    }
+  },
+  "elapsed_min": 3.27
+}

@@ -1,0 +1,92 @@
+START 2026-11-17 09:50:55 step exact
+--- record old runtime 09:51:01 | R37_GPU_WINDOW=1
+[r39-ready] Loaded 42 QTIP HYB layers (qtip_hyb_A_custom, 6326528 B/row), patched_routers=0, pool=2715 VRAM slots (16.0 GiB) + 41.8 GiB cudaHostRegister DDR5, graphs=True, mtp=False in 554.3s
+[port-exact] qtip runner of <PKG_ROOT>\claude_r39_qtip\runtime loaded in 555s; pool glm53_fold_qtip_runtime.QtipPinnedSlotPool
+[port-exact] code: 39 prompt tokens, 128 graph steps recorded (greedy)
+[port-exact] capital: 35 prompt tokens, 128 graph steps recorded (greedy)
+[port-exact] math: 39 prompt tokens, 128 graph steps recorded (greedy)
+[port-exact] record written: <PKG_ROOT>\claude_r39_speed\out_r39s\pe_qtip_old.pt
+exit=0 10:01:20
+--- record new runtime, flags off 10:01:26 | R37_GPU_WINDOW=1
+[r39-ready] Loaded 42 QTIP HYB layers (qtip_hyb_A_custom, 6326528 B/row), patched_routers=0, pool[qtip]=2715 VRAM slots (16.0 GiB) + 41.8 GiB cudaHostRegister DDR5, graphs=True, mtp=False in 66.0s
+[port-exact] qtip runner of <PKG_ROOT>\claude_r39_speed loaded in 67s; pool glm53_fold_qtip_runtime.QtipPinnedSlotPool
+[port-exact] code: graph against eager over 16 steps (information): {"steps": 16, "bitwise_identical": 0, "top1_agree": 16, "mean_kl_eager_to_graph": 1.8113837025054435e-05, "max_abs_logit_diff": 0.6872385740280151}
+[port-exact] code: 39 prompt tokens, 128 graph steps recorded (forced)
+[port-exact] capital: graph against eager over 16 steps (information): {"steps": 16, "bitwise_identical": 0, "top1_agree": 16, "mean_kl_eager_to_graph": 1.5906927886081408e-07, "max_abs_logit_diff": 0.36128759384155273}
+[port-exact] capital: 35 prompt tokens, 128 graph steps recorded (forced)
+[port-exact] math: graph against eager over 16 steps (information): {"steps": 16, "bitwise_identical": 0, "top1_agree": 16, "mean_kl_eager_to_graph": 2.6376585481779324e-07, "max_abs_logit_diff": 0.20808076858520508}
+[port-exact] math: 39 prompt tokens, 128 graph steps recorded (forced)
+[port-exact] record written: <PKG_ROOT>\claude_r39_speed\out_r39s\pe_qtip_new_off.pt
+exit=0 10:03:39
+--- record new runtime, production flags 10:03:45 | R32_POOL=6 R33_REGISTER_GIB=68 R33_REGISTER_MODE=rows R35_POOL_COLD_MARGIN=0.01 R35_POOL_COLD_TOPK=6 R35_POOL_DEMAND=1 R35_POOL_DEMAND_STREAM=1 R35_POOL_EVICT=gdsf R35_POOL_GATHER=readfile R35_POOL_SIGNAL=1 R36_FP8_GEMV=v2 R36_FUSE_MHC=1 R37_GPU_WINDOW=1 R37_POOL_REG_TOPK=6 R37_TCQ_GX=32 R37_TCQ_KERNEL=e_sh16 R37_TCQ_WARPS=16
+[r39s] registered tier (rows): 42 layers, 10174 rows, 59.95 GiB locked in 26.6 s
+[r39s] pool v6: a_signal=1 b_demand=1 b2_stream=1 c_gather=readfile d_evict=gdsf e_topk=6 e_margin=0.01 r_topk=6 r_margin=0
+[r39-ready] Loaded 42 QTIP HYB layers (qtip_hyb_A_custom, 6326528 B/row), patched_routers=0, pool[v6]=2715 VRAM slots (16.0 GiB) + 60.0 GiB cudaHostRegister DDR5, graphs=True, mtp=False in 71.1s
+[port-exact] qtip runner of <PKG_ROOT>\claude_r39_speed loaded in 72s; pool glm53_fold_expert_pool_v6.ExpertPool
+[port-exact] code: 39 prompt tokens, 128 graph steps recorded (forced)
+[port-exact] capital: 35 prompt tokens, 128 graph steps recorded (forced)
+[port-exact] math: 39 prompt tokens, 128 graph steps recorded (forced)
+[port-exact] record written: <PKG_ROOT>\claude_r39_speed\out_r39s\pe_qtip_new_prod.pt
+exit=0 10:05:38
+--- compare old vs new (flags off)
+A: <PKG_ROOT>\claude_r39_qtip\runtime (qtip, pool glm53_fold_qtip_runtime, flags None)
+B: <PKG_ROOT>\claude_r39_speed (qtip, pool glm53_fold_qtip_runtime, flags None)
+environment differences (A, B): {}
+  {"name": "code", "steps": 128, "bitwise_identical": 128, "first_different_step": null, "max_abs_diff": 0.0, "mean_kl": 0.0, "max_kl": 0.0, "top1_agree": 128, "prefill_logits_identical": true, "first_token_equal": true}
+  {"name": "capital", "steps": 128, "bitwise_identical": 128, "first_different_step": null, "max_abs_diff": 0.0, "mean_kl": 0.0, "max_kl": 0.0, "top1_agree": 128, "prefill_logits_identical": true, "first_token_equal": true}
+  {"name": "math", "steps": 128, "bitwise_identical": 128, "first_different_step": null, "max_abs_diff": 0.0, "mean_kl": 0.0, "max_kl": 0.0, "top1_agree": 128, "prefill_logits_identical": true, "first_token_equal": true}
+[port-exact] 384 of 384 forced graph steps bitwise identical: BIT-EXACT
+--- compare old vs new (production flags)
+A: <PKG_ROOT>\claude_r39_qtip\runtime (qtip, pool glm53_fold_qtip_runtime, flags None)
+B: <PKG_ROOT>\claude_r39_speed (qtip, pool glm53_fold_expert_pool_v6, flags a_signal=1 b_demand=1 b2_stream=1 c_gather=readfile d_evict=gdsf e_topk=6 e_margin=0.01 r_topk=6 r_margin=0)
+environment differences (A, B): {"R32_POOL": [null, "6"], "R33_REGISTER_GIB": [null, "68"], "R33_REGISTER_MODE": [null, "rows"], "R35_POOL_COLD_MARGIN": [null, "0.01"], "R35_POOL_COLD_TOPK": [null, "6"], "R35_POOL_DEMAND": [null, "1"], "R35_POOL_DEMAND_STREAM": [null, "1"], "R35_POOL_EVICT": [null, "gdsf"], "R35_POOL_GATHER": [null, "readfile"], "R35_POOL_SIGNAL": [null, "1"], "R36_FP8_GEMV": [null, "v2"], "R36_FUSE_MHC": [null, "1"], "R37_POOL_REG_TOPK": [null, "6"], "R37_TCQ_GX": [null, "32"], "R37_TCQ_KERNEL": [null, "e_sh16"], "R37_TCQ_WARPS": [null, "16"]}
+  {"name": "code", "steps": 128, "bitwise_identical": 128, "first_different_step": null, "max_abs_diff": 0.0, "mean_kl": 0.0, "max_kl": 0.0, "top1_agree": 128, "prefill_logits_identical": true, "first_token_equal": true}
+  {"name": "capital", "steps": 128, "bitwise_identical": 128, "first_different_step": null, "max_abs_diff": 0.0, "mean_kl": 0.0, "max_kl": 0.0, "top1_agree": 128, "prefill_logits_identical": true, "first_token_equal": true}
+  {"name": "math", "steps": 128, "bitwise_identical": 128, "first_different_step": null, "max_abs_diff": 0.0, "mean_kl": 0.0, "max_kl": 0.0, "top1_agree": 128, "prefill_logits_identical": true, "first_token_equal": true}
+[port-exact] 384 of 384 forced graph steps bitwise identical: BIT-EXACT
+START 2026-11-18 00:19:15 step exact
+--- record old runtime 00:19:22 | R37_GPU_WINDOW=1
+[r39-ready] Loaded 42 QTIP HYB layers (qtip_hyb_A_custom, 6326528 B/row), patched_routers=0, pool=2715 VRAM slots (16.0 GiB) + 41.8 GiB cudaHostRegister DDR5, graphs=True, mtp=False in 67.8s
+[port-exact] qtip runner of <PKG_ROOT>\claude_r39_qtip\runtime loaded in 69s; pool glm53_fold_qtip_runtime.QtipPinnedSlotPool
+[port-exact] code: 39 prompt tokens, 128 graph steps recorded (greedy)
+[port-exact] capital: 35 prompt tokens, 128 graph steps recorded (greedy)
+[port-exact] math: 39 prompt tokens, 128 graph steps recorded (greedy)
+[port-exact] record written: <PKG_ROOT>\claude_r39_speed\out_r39s\pe_qtip_old.pt
+exit=0 00:21:27
+--- record new runtime, flags off 00:21:33 | R37_GPU_WINDOW=1
+[r39-ready] Loaded 42 QTIP HYB layers (qtip_hyb_A_custom, 6326528 B/row), patched_routers=0, pool[qtip]=2715 VRAM slots (16.0 GiB) + 41.8 GiB cudaHostRegister DDR5, graphs=True, mtp=False in 71.6s
+[port-exact] qtip runner of <PKG_ROOT>\claude_r39_speed loaded in 73s; pool glm53_fold_qtip_runtime.QtipPinnedSlotPool
+[port-exact] code: graph against eager over 16 steps (information): {"steps": 16, "bitwise_identical": 0, "top1_agree": 16, "mean_kl_eager_to_graph": 1.8113837025054435e-05, "max_abs_logit_diff": 0.6872385740280151}
+[port-exact] code: 39 prompt tokens, 128 graph steps recorded (forced)
+[port-exact] capital: graph against eager over 16 steps (information): {"steps": 16, "bitwise_identical": 0, "top1_agree": 16, "mean_kl_eager_to_graph": 1.5906927886081408e-07, "max_abs_logit_diff": 0.36128759384155273}
+[port-exact] capital: 35 prompt tokens, 128 graph steps recorded (forced)
+[port-exact] math: graph against eager over 16 steps (information): {"steps": 16, "bitwise_identical": 0, "top1_agree": 16, "mean_kl_eager_to_graph": 2.6376585481779324e-07, "max_abs_logit_diff": 0.20808076858520508}
+[port-exact] math: 39 prompt tokens, 128 graph steps recorded (forced)
+[port-exact] record written: <PKG_ROOT>\claude_r39_speed\out_r39s\pe_qtip_new_off.pt
+exit=0 00:23:52
+--- record new runtime, production flags 00:23:58 | R32_POOL=6 R33_REGISTER_GIB=68 R33_REGISTER_MODE=rows R35_POOL_COLD_MARGIN=0.01 R35_POOL_COLD_TOPK=6 R35_POOL_DEMAND=1 R35_POOL_DEMAND_STREAM=1 R35_POOL_EVICT=gdsf R35_POOL_GATHER=readfile R35_POOL_SIGNAL=1 R36_FP8_GEMV=v2 R36_FUSE_MHC=1 R37_GPU_WINDOW=1 R37_POOL_REG_TOPK=6 R37_TCQ_GX=32 R37_TCQ_KERNEL=e_sh16 R37_TCQ_WARPS=16
+[r39s] registered tier (rows): 42 layers, 10174 rows, 59.95 GiB locked in 27.6 s
+[r39s] pool v6: a_signal=1 b_demand=1 b2_stream=1 c_gather=readfile d_evict=gdsf e_topk=6 e_margin=0.01 r_topk=6 r_margin=0
+[r39-ready] Loaded 42 QTIP HYB layers (qtip_hyb_A_custom, 6326528 B/row), patched_routers=0, pool[v6]=2715 VRAM slots (16.0 GiB) + 60.0 GiB cudaHostRegister DDR5, graphs=True, mtp=False in 73.7s
+[port-exact] qtip runner of <PKG_ROOT>\claude_r39_speed loaded in 75s; pool glm53_fold_expert_pool_v6.ExpertPool
+[port-exact] code: 39 prompt tokens, 128 graph steps recorded (forced)
+[port-exact] capital: 35 prompt tokens, 128 graph steps recorded (forced)
+[port-exact] math: 39 prompt tokens, 128 graph steps recorded (forced)
+[port-exact] record written: <PKG_ROOT>\claude_r39_speed\out_r39s\pe_qtip_new_prod.pt
+exit=0 00:25:55
+--- compare old vs new (flags off)
+A: <PKG_ROOT>\claude_r39_qtip\runtime (qtip, pool glm53_fold_qtip_runtime, flags None)
+B: <PKG_ROOT>\claude_r39_speed (qtip, pool glm53_fold_qtip_runtime, flags None)
+environment differences (A, B): {}
+  {"name": "code", "steps": 128, "bitwise_identical": 128, "first_different_step": null, "max_abs_diff": 0.0, "mean_kl": 0.0, "max_kl": 0.0, "top1_agree": 128, "prefill_logits_identical": true, "first_token_equal": true}
+  {"name": "capital", "steps": 128, "bitwise_identical": 128, "first_different_step": null, "max_abs_diff": 0.0, "mean_kl": 0.0, "max_kl": 0.0, "top1_agree": 128, "prefill_logits_identical": true, "first_token_equal": true}
+  {"name": "math", "steps": 128, "bitwise_identical": 128, "first_different_step": null, "max_abs_diff": 0.0, "mean_kl": 0.0, "max_kl": 0.0, "top1_agree": 128, "prefill_logits_identical": true, "first_token_equal": true}
+[port-exact] 384 of 384 forced graph steps bitwise identical: BIT-EXACT
+--- compare old vs new (production flags)
+A: <PKG_ROOT>\claude_r39_qtip\runtime (qtip, pool glm53_fold_qtip_runtime, flags None)
+B: <PKG_ROOT>\claude_r39_speed (qtip, pool glm53_fold_expert_pool_v6, flags a_signal=1 b_demand=1 b2_stream=1 c_gather=readfile d_evict=gdsf e_topk=6 e_margin=0.01 r_topk=6 r_margin=0)
+environment differences (A, B): {"R32_POOL": [null, "6"], "R33_REGISTER_GIB": [null, "68"], "R33_REGISTER_MODE": [null, "rows"], "R35_POOL_COLD_MARGIN": [null, "0.01"], "R35_POOL_COLD_TOPK": [null, "6"], "R35_POOL_DEMAND": [null, "1"], "R35_POOL_DEMAND_STREAM": [null, "1"], "R35_POOL_EVICT": [null, "gdsf"], "R35_POOL_GATHER": [null, "readfile"], "R35_POOL_SIGNAL": [null, "1"], "R36_FP8_GEMV": [null, "v2"], "R36_FUSE_MHC": [null, "1"], "R37_POOL_REG_TOPK": [null, "6"], "R37_TCQ_GX": [null, "32"], "R37_TCQ_KERNEL": [null, "e_sh16"], "R37_TCQ_WARPS": [null, "16"]}
+  {"name": "code", "steps": 128, "bitwise_identical": 128, "first_different_step": null, "max_abs_diff": 0.0, "mean_kl": 0.0, "max_kl": 0.0, "top1_agree": 128, "prefill_logits_identical": true, "first_token_equal": true}
+  {"name": "capital", "steps": 128, "bitwise_identical": 128, "first_different_step": null, "max_abs_diff": 0.0, "mean_kl": 0.0, "max_kl": 0.0, "top1_agree": 128, "prefill_logits_identical": true, "first_token_equal": true}
+  {"name": "math", "steps": 128, "bitwise_identical": 128, "first_different_step": null, "max_abs_diff": 0.0, "mean_kl": 0.0, "max_kl": 0.0, "top1_agree": 128, "prefill_logits_identical": true, "first_token_equal": true}
+[port-exact] 384 of 384 forced graph steps bitwise identical: BIT-EXACT

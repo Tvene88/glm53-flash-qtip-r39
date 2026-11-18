@@ -1,0 +1,118 @@
+{
+  "L27_qb_calct_E32": {
+    "TCQ33_A_best": {
+      "content_snr_db": 8.839,
+      "norm_ratio": 0.9798,
+      "cos": 0.93354,
+      "bpw": 2.0216,
+      "weight_snr_db": {
+        "g": 10.266,
+        "u": 10.238,
+        "d": 11.084
+      },
+      "seconds": 11.1
+    },
+    "QTIP_L16_HYB_2D16": {
+      "content_snr_db": 9.259,
+      "norm_ratio": 0.9783,
+      "cos": 0.93962,
+      "delta_vs_tcq33_db": 0.42,
+      "bpw": 2.0112,
+      "weight_snr_db": {
+        "g": 10.598,
+        "u": 10.569,
+        "d": 11.398
+      },
+      "h_snr_db": {
+        "g": 14.371,
+        "u": 13.687,
+        "d": 11.96
+      },
+      "seconds": 28.6,
+      "nvrtc_gemv_check": {
+        "gemv_cos_vs_ref": 1.0,
+        "gemv_max_rel_err": 1e-06,
+        "gemv_8pair_us": 66.47
+      }
+    },
+    "QTIP_L16_HYB_2D16_QZ": {
+      "content_snr_db": 9.244,
+      "norm_ratio": 0.9655,
+      "cos": 0.93899,
+      "delta_vs_tcq33_db": 0.405,
+      "bpw": 2.0112,
+      "weight_snr_db": {
+        "g": 10.598,
+        "u": 10.569,
+        "d": 11.421
+      },
+      "h_snr_db": {
+        "g": 14.371,
+        "u": 13.687,
+        "d": 11.875
+      },
+      "seconds": 28.7,
+      "nvrtc_gemv_check": {
+        "gemv_cos_vs_ref": 1.0,
+        "gemv_max_rel_err": 1e-06,
+        "gemv_8pair_us": 67.56
+      }
+    },
+    "QTIP_L16_HYB_2D16_QZ_Tune": {
+      "content_snr_db": 9.261,
+      "norm_ratio": 0.9363,
+      "cos": 0.93885,
+      "delta_vs_tcq33_db": 0.422,
+      "bpw": 2.0112,
+      "weight_snr_db": {
+        "g": 10.598,
+        "u": 10.569,
+        "d": 11.421
+      },
+      "h_snr_db": {
+        "g": 14.371,
+        "u": 13.687,
+        "d": 11.875
+      },
+      "seconds": 46.6,
+      "nvrtc_gemv_check": {
+        "gemv_cos_vs_ref": 1.0,
+        "gemv_max_rel_err": 1e-06,
+        "gemv_8pair_us": 68.05
+      },
+      "joint_tune": {
+        "experts_tuned": 23,
+        "val_rel_err_before": 0.09806,
+        "val_rel_err_after": 0.09646
+      }
+    },
+    "QTIP_Sub70_GU125_2D16_QZ_Tune": {
+      "content_snr_db": 8.522,
+      "norm_ratio": 0.929,
+      "cos": 0.92707,
+      "delta_vs_tcq33_db": -0.317,
+      "bpw": 1.9278,
+      "weight_snr_db": {
+        "g": 9.145,
+        "u": 9.073,
+        "d": 11.421
+      },
+      "h_snr_db": {
+        "g": 12.754,
+        "u": 12.028,
+        "d": 11.86
+      },
+      "seconds": 190.7,
+      "nvrtc_gemv_check": {
+        "gemv_cos_vs_ref": 1.0,
+        "gemv_max_rel_err": 1e-06,
+        "gemv_8pair_us": 66.85
+      },
+      "joint_tune": {
+        "experts_tuned": 26,
+        "val_rel_err_before": 0.11194,
+        "val_rel_err_after": 0.1107
+      }
+    }
+  }
+}

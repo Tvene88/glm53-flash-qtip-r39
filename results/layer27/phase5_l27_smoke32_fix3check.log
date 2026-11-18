@@ -1,0 +1,11 @@
+START 21:10:52
+[L27] Loaded 32 exact experts + 40161 'qb' tokens (24600 scored content tokens) in 4.6s
+[CODEBOOK GATE] Held-out N(0,1) k=2 SNR: QTIP L=16 mul1 = 11.484 dB | QTIP L=16 HYB = 11.539 dB
+[RESULT] QTIP_L16_HYB_2D16             : {"content_snr_db": 9.259, "norm_ratio": 0.9783, "cos": 0.93962, "delta_vs_tcq33_db": 0.42, "bpw": 2.0112, "weight_snr_db": {"g": 10.598, "u": 10.569, "d": 11.398}, "h_snr_db": {"g": 14.371, "u": 13.687, "d": 11.96}, "seconds": 30.8, "nvrtc_gemv_check": {"gemv_cos_vs_ref": 1.0, "gemv_max_rel_err": 1e-06, "gemv_8pair_us": 67.7}}
+<PKG_ROOT>\claude_r39_qtip\build_r39\r39_l27_qtip_2d_ldlq_lab.py:1445: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\torch\csrc\autograd\generated\python_variable_methods.cpp:837.)
+  start_v = float(_loss(eval_mask, sig_va))
+[RESULT] QTIP_L16_HYB_2D16_QZ_Tune     : {"content_snr_db": 9.261, "norm_ratio": 0.9363, "cos": 0.93885, "delta_vs_tcq33_db": 0.422, "bpw": 2.0112, "weight_snr_db": {"g": 10.598, "u": 10.569, "d": 11.421}, "h_snr_db": {"g": 14.371, "u": 13.687, "d": 11.875}, "seconds": 47.6, "nvrtc_gemv_check": {"gemv_cos_vs_ref": 1.0, "gemv_max_rel_err": 1e-06, "gemv_8pair_us": 69.84}, "joint_tune": {"experts_tuned": 23, "val_rel_err_before": 0.09806, "val_rel_err_after": 0.09646}}
+
+[DONE] Saved full Layer 27 ablation report to build_r39\out_r39\r39_l27_qtip_lab_smoke32_fix3check.json (key='L27_qb_calct_E32')
+exit=0 elapsed=93s end 21:12:25

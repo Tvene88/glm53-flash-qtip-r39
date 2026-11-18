@@ -1,0 +1,41 @@
+trace: 133179 calls, pool 3054 slots, flags evict=gdsf reg_topk=6
+logged pool totals (whole run, prefill included): hits 476614 misses 122743 prefetch_issued 93320 prefetch_useful 69331
+variant                                         slots  demand      pf    used    rows  est ms est tok/s
+logged setting                                   3054   47.25   60.93   44.95  108.17   39.56     25.28
+    simulated totals (whole run): hits 476439 misses 122918 prefetch_issued 93220 prefetch_useful 69387  [check against the logged totals]
+reg_topk 4                                       3054   58.90   36.33   29.98   95.23   39.31     25.44
+reg_topk 5                                       3054   52.69   48.13   37.65  100.82   39.29     25.45
+reg_topk 7                                       3054   42.73   74.05   51.49  116.78   40.09     24.95
+reg_topk 8                                       3054   38.92   87.92   57.64  126.84   40.86     24.47
+no prefetch gate (0)                             3054   38.92   87.92   57.64  126.84   40.86     24.47
+margin gate 0.02 (no rank gate)                  3054   47.76   57.85   43.78  105.61   39.32     25.43
+margin gate 0.03 (no rank gate)                  3054   51.35   48.69   38.80  100.04   39.05     25.61
+margin gate 0.04 (no rank gate)                  3054   54.58   41.90   34.62   96.47   38.98     25.65
+margin gate 0.05 (no rank gate)                  3054   57.40   36.56   31.17   93.96   38.99     25.65
+margin gate 0.065 (no rank gate)                 3054   60.72   30.72   27.18   91.44   39.06     25.60
+margin gate 0.08 (no rank gate)                  3054   63.48   26.51   24.06   89.98   39.19     25.52
+ring 40 inside the pool, reg_topk 6              3054   46.68   63.43   41.05  110.10   39.73     25.17
+ring 40 inside the pool, reg_topk 8              3054   38.13   96.01   49.60  134.14   41.63     24.02
+ring 80 inside the pool, reg_topk 6              3054   46.81   62.21   42.14  109.02   39.62     25.24
+ring 80 inside the pool, reg_topk 8              3054   38.05   92.39   50.90  130.43   41.19     24.28
+ring 160 inside the pool, reg_topk 6             3054   47.23   61.19   44.06  108.42   39.59     25.26
+ring 160 inside the pool, reg_topk 8             3054   38.31   90.12   52.98  128.43   40.98     24.40
+ring 80 added (+80 slots), reg_topk 6            3134   45.61   60.66   40.99  106.27   39.16     25.54
+ring 80 added (+80 slots), reg_topk 8            3134   37.09   90.17   49.51  127.26   40.71     24.56
++80 slots (no ring)                              3134   45.99   59.40   43.80  105.39   39.10     25.58
+pool 18.5 GiB                                    3139   45.91   59.29   43.74  105.20   39.07     25.60
+pool 19.0 GiB                                    3224   44.69   57.66   42.54  102.35   38.60     25.91
+pool 19.5 GiB                                    3309   43.52   56.11   41.41   99.63   38.15     26.21
+pool 20.0 GiB                                    3394   42.35   54.53   40.23   96.88   37.70     26.53
+lru                                              3054   50.61   63.03   49.20  113.64   40.58     24.65
+decayed frequency, half-life 8 tokens            3054   48.45   66.74   41.54  115.19   40.52     24.68
+decayed frequency, half-life 32 tokens           3054   51.74   72.36   46.23  124.10   41.93     23.85
+decayed frequency, half-life 128 tokens          3054   60.43   88.75   60.46  149.18   45.84     21.81
+decayed frequency, half-life 512 tokens          3054   62.28   93.40   64.58  155.68   46.81     21.36
+decayed frequency, half-life 2048 tokens         3054   62.44   94.46   65.47  156.90   46.97     21.29
+decayed frequency, half-life 8192 tokens         3054   62.48   94.60   65.60  157.09   47.00     21.28
+decayed frequency, half-life inf tokens          3054   62.12   93.99   65.27  156.11   46.84     21.35
+gdsf, frequency reset at eviction                3054   52.38   71.97   46.36  124.35   42.03     23.79
+prefill inserts cold                             3054   47.95   62.75   46.24  110.70   39.94     25.04
+optimal eviction (Belady), no prefetch, 3054     3054                           38.59   (lower bound of rows fetched per token)
+optimal eviction (Belady), no prefetch, 3224     3224                           35.90   (lower bound of rows fetched per token)

@@ -1,0 +1,34 @@
+START 22:17:17 power cap 450.00 W; C: free 51.3 GB
+<PKG_ROOT>\claude_r39_qtip\build_r39\run_qtip_build_r39.py:40: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
+  --dst C:\models\GLM53-APEX-FOLD-R39-HYB \
+[r39-build 22:17:20] start QTIP HYB rule=A (2.0112 bpw, 6326528 B/expert); prune_layers=42; n0=8192.0 damp=0.1 qz_damp=0.15; todo=[5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45]; linked=0; free=47.8 GiB
+[r39-build 22:17:31] calibration: 128 x 2048 tok; qbench: 29 seqs
+[r39-build 22:17:35] teacher stream: 128 x 2048 tok exact FP8 -> C:\models\r39_teacher_top128\train_cal_top128.pt
+[r39-build 22:18:20] resume: calibration replayed through L03 (18s)
+[r39-build 22:18:39] resume: calibration replayed through L04 (19s)
+[r39-build 22:18:39] streams ready (64s)
+[r39-build 22:23:35] deleted model-00055-of-00062.safetensors (not needed again)
+[r39-build 22:23:35] L05 done: {"load_s": 11.8, "cal_in_s": 10.5, "t_hess": 1.0, "cal_tokens": 261888, "experts_kept": 239, "experts_unseen": 0, "weight_snr_db": {"g": 10.481, "u": 10.471, "d": 11.215}, "bytes_file": 1512070552, "encode_s": 239.5, "nvrtc_gemv_cos": 1.0, "t_cal_adv": 8.9, "t_evn": 4.8, "t_evx": 2.8, "t_trx": 20.9, "t_evo": 1.5, "snr_new_db": 7.263, "snr_old_db": 8.592, "streams_s": 41.6} | free 51.4 GiB | 4.9 min, ETA 197 min
+[r39-build 22:30:40] deleted model-00056-of-00062.safetensors (not needed again)
+[r39-build 22:30:40] L06 done: {"load_s": 12.4, "cal_in_s": 9.9, "t_hess": 0.9, "cal_tokens": 261888, "experts_kept": 240, "experts_unseen": 0, "weight_snr_db": {"g": 10.532, "u": 10.52, "d": 11.224}, "bytes_file": 1518397080, "encode_s": 342.8, "nvrtc_gemv_cos": 1.0, "t_cal_adv": 8.9, "t_evn": 4.7, "t_evx": 2.9, "t_trx": 21.2, "t_evo": 1.4, "snr_new_db": 8.139, "snr_old_db": 9.342, "streams_s": 41.2, "ckpt_s": 25.4} | free 44.6 GiB | 12.0 min, ETA 234 min
+[r39-build 22:36:28] deleted model-00057-of-00062.safetensors (not needed again)
+[r39-build 22:36:28] deleted model-00058-of-00062.safetensors (not needed again)
+[r39-build 22:36:28] L07 done: {"load_s": 74.0, "cal_in_s": 10.8, "t_hess": 0.8, "cal_tokens": 261888, "experts_kept": 241, "experts_unseen": 0, "weight_snr_db": {"g": 10.541, "u": 10.526, "d": 11.23}, "bytes_file": 1524723608, "encode_s": 235.3, "nvrtc_gemv_cos": 1.0, "t_cal_adv": 8.8, "t_evn": 3.5, "t_evx": 2.4, "t_trx": 19.0, "t_evo": 0.9, "snr_new_db": 9.647, "snr_old_db": 10.4, "streams_s": 36.6} | free 48.3 GiB | 17.8 min, ETA 226 min
+[r39-build 22:41:14] deleted model-00059-of-00062.safetensors (not needed again)
+[r39-build 22:41:14] L08 done: {"load_s": 10.6, "cal_in_s": 10.6, "t_hess": 0.8, "cal_tokens": 261888, "experts_kept": 235, "experts_unseen": 0, "weight_snr_db": {"g": 10.554, "u": 10.538, "d": 11.218}, "bytes_file": 1486764440, "encode_s": 232.6, "nvrtc_gemv_cos": 1.0, "t_cal_adv": 8.4, "t_evn": 4.0, "t_evx": 2.9, "t_trx": 21.2, "t_evo": 1.5, "snr_new_db": 9.325, "snr_old_db": 10.48, "streams_s": 40.0} | free 47.0 GiB | 22.6 min, ETA 209 min
+[r39-build 22:47:06] deleted model-00060-of-00062.safetensors (not needed again)
+[r39-build 22:47:06] deleted model-00061-of-00062.safetensors (not needed again)
+[r39-build 22:47:06] L09 done: {"load_s": 13.2, "cal_in_s": 10.5, "t_hess": 0.9, "cal_tokens": 261888, "experts_kept": 237, "experts_unseen": 0, "weight_snr_db": {"g": 10.568, "u": 10.553, "d": 11.224}, "bytes_file": 1499417496, "encode_s": 295.7, "nvrtc_gemv_cos": 1.0, "t_cal_adv": 8.5, "t_evn": 4.5, "t_evx": 2.9, "t_trx": 21.2, "t_evo": 1.5, "snr_new_db": 9.181, "snr_old_db": 10.176, "streams_s": 40.6} | free 45.5 GiB | 28.4 min, ETA 205 min
+[r39-build 22:53:34] deleted model-00003-of-00062.safetensors (not needed again)
+[r39-build 22:53:34] L10 done: {"load_s": 14.0, "cal_in_s": 10.5, "t_hess": 0.8, "cal_tokens": 261888, "experts_kept": 236, "experts_unseen": 0, "weight_snr_db": {"g": 10.547, "u": 10.531, "d": 11.232}, "bytes_file": 1493090968, "encode_s": 232.0, "nvrtc_gemv_cos": 1.0, "t_cal_adv": 8.4, "t_evn": 4.6, "t_evx": 2.9, "t_trx": 21.4, "t_evo": 1.4, "snr_new_db": 10.583, "snr_old_db": 11.394, "streams_s": 40.7, "ckpt_s": 98.2} | free 40.6 GiB | 34.9 min, ETA 204 min
+[r39-build 23:00:26] deleted model-00004-of-00062.safetensors (not needed again)
+[r39-build 23:00:26] L11 done: {"load_s": 102.0, "cal_in_s": 7.3, "t_hess": 0.8, "cal_tokens": 261888, "experts_kept": 234, "experts_unseen": 0, "weight_snr_db": {"g": 10.578, "u": 10.562, "d": 11.228}, "bytes_file": 1480437912, "encode_s": 272.1, "nvrtc_gemv_cos": 1.0, "t_cal_adv": 8.3, "t_evn": 3.5, "t_evx": 2.4, "t_trx": 18.6, "t_evo": 0.9, "snr_new_db": 10.249, "snr_old_db": 10.916, "streams_s": 36.0} | free 37.5 GiB | 41.8 min, ETA 203 min
+[r39-build 23:10:16] deleted model-00005-of-00062.safetensors (not needed again)
+[r39-build 23:10:16] deleted model-00006-of-00062.safetensors (not needed again)
+[r39-build 23:10:16] L12 done: {"load_s": 18.9, "cal_in_s": 10.6, "t_hess": 0.7, "cal_tokens": 261888, "experts_kept": 236, "experts_unseen": 0, "weight_snr_db": {"g": 10.548, "u": 10.529, "d": 11.246}, "bytes_file": 1493090968, "encode_s": 255.9, "nvrtc_gemv_cos": 1.0, "t_cal_adv": 8.4, "t_evn": 4.1, "t_evx": 2.9, "t_trx": 21.0, "t_evo": 1.5, "snr_new_db": 10.091, "snr_old_db": 10.987, "streams_s": 40.1, "ckpt_s": 272.4} | free 36.1 GiB | 51.6 min, ETA 213 min
+[r39-build 23:15:27] deleted model-00007-of-00062.safetensors (not needed again)
+[r39-build 23:15:27] L13 done: {"load_s": 22.4, "cal_in_s": 10.1, "t_hess": 0.7, "cal_tokens": 261888, "experts_kept": 242, "experts_unseen": 0, "weight_snr_db": {"g": 10.635, "u": 10.599, "d": 11.256}, "bytes_file": 1531050136, "encode_s": 246.4, "nvrtc_gemv_cos": 1.0, "t_cal_adv": 8.5, "t_evn": 3.9, "t_evx": 2.9, "t_trx": 21.0, "t_evo": 1.5, "snr_new_db": 10.152, "snr_old_db": 10.955, "streams_s": 40.0} | free 39.7 GiB | 56.8 min, ETA 202 min
+[r39-build 23:21:29] deleted model-00008-of-00062.safetensors (not needed again)
+[r39-build 23:21:29] deleted model-00009-of-00062.safetensors (not needed again)
+[r39-build 23:21:29] L14 done: {"load_s": 15.2, "cal_in_s": 10.2, "t_hess": 0.9, "cal_tokens": 261888, "experts_kept": 242, "experts_unseen": 0, "weight_snr_db": {"g": 10.588, "u": 10.555, "d": 11.246}, "bytes_file": 1531050136, "encode_s": 263.8, "nvrtc_gemv_cos": 1.0, "t_cal_adv": 8.5, "t_evn": 4.2, "t_evx": 2.9, "t_trx": 21.1, "t_evo": 1.5, "snr_new_db": 9.941, "snr_old_db": 10.771, "streams_s": 40.5, "ckpt_s": 39.4} | free 35.4 GiB | 62.8 min, ETA 195 min
+exit=-1 elapsed=3855s end 23:21:32

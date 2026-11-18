@@ -1,0 +1,23 @@
+START 2026-11-17 15:23:15 step torture pool 18 extra '' tag ''
+[r39t torture] rows/base: PASS ops 30000 entries 168295 mismatches 0 scan 0 inv [] hits 147717 misses 20578 prefetched 12777 claimed 8959 dropped 3198 skipped_reg 551 errors 0  (8.6 s)
+[r39t torture] rows/fast1: PASS ops 30000 entries 168937 mismatches 0 scan 0 inv [] hits 148852 misses 20085 prefetched 12784 claimed 8885 dropped 3263 skipped_reg 507 errors 0  (8.4 s)
+[r39t torture] rows/fast2: PASS ops 30000 entries 168577 mismatches 0 scan 0 inv [] hits 148379 misses 20198 prefetched 12674 claimed 8913 dropped 3161 skipped_reg 601 errors 0  (8.4 s)
+[r39t torture] rows/lazy: PASS ops 30000 entries 168203 mismatches 0 scan 0 inv [] hits 147720 misses 20483 prefetched 12857 claimed 8950 dropped 3294 skipped_reg 591 errors 0  (8.3 s)
+[r39t torture] rows/preevict: PASS ops 30000 entries 168207 mismatches 0 scan 0 inv [] hits 147437 misses 20770 prefetched 13210 claimed 9246 dropped 3309 skipped_reg 580 errors 0 preevicted=26096 (7.9 s)
+[r39t torture] rows/pfad: PASS ops 30000 entries 168023 mismatches 0 scan 0 inv [] hits 147479 misses 20544 prefetched 12780 claimed 9012 dropped 3151 skipped_reg 570 errors 0 pf_waits=0 (8.3 s)
+[r39t torture] rows/paced1: PASS ops 30000 entries 167783 mismatches 0 scan 0 inv [] hits 147880 misses 19903 prefetched 12356 claimed 8604 dropped 3742 skipped_reg 428 errors 0 paced_demand_waits=0 paced_link_waits=0 (8.4 s)
+[r39t torture] rows/paced2: PASS ops 30000 entries 167877 mismatches 0 scan 0 inv [] hits 147892 misses 19985 prefetched 12547 claimed 8671 dropped 3863 skipped_reg 401 errors 0 paced_demand_waits=0 paced_link_waits=0 (8.5 s)
+[r39t torture] rows/all: PASS ops 30000 entries 169219 mismatches 0 scan 0 inv [] hits 148997 misses 20222 prefetched 12720 claimed 8866 dropped 3853 skipped_reg 410 errors 0 paced_demand_waits=0 paced_link_waits=0 pf_waits=0 preevicted=25099 (8.6 s)
+[r39t torture] rows/recommended: PASS ops 30000 entries 168919 mismatches 0 scan 0 inv [] hits 148703 misses 20216 prefetched 12595 claimed 8744 dropped 3288 skipped_reg 535 errors 0  (8.4 s)
+[r39t torture] layers/base: PASS ops 30000 entries 167658 mismatches 0 scan 0 inv [] hits 148030 misses 19628 prefetched 12680 claimed 8843 dropped 2001 skipped_reg 1403 errors 0  (6.6 s)
+[r39t torture] layers/fast1: PASS ops 30000 entries 168547 mismatches 0 scan 0 inv [] hits 148886 misses 19661 prefetched 12605 claimed 8847 dropped 1920 skipped_reg 1388 errors 0  (6.9 s)
+[r39t torture] layers/fast2: PASS ops 30000 entries 167591 mismatches 0 scan 0 inv [] hits 147776 misses 19815 prefetched 12715 claimed 8891 dropped 1914 skipped_reg 1268 errors 0  (7.6 s)
+[r39t torture] layers/lazy: PASS ops 30000 entries 168060 mismatches 0 scan 0 inv [] hits 148341 misses 19719 prefetched 12405 claimed 8569 dropped 1927 skipped_reg 1297 errors 0  (7.8 s)
+[r39t torture] layers/preevict: PASS ops 30000 entries 168117 mismatches 0 scan 0 inv [] hits 147875 misses 20242 prefetched 12771 claimed 8875 dropped 2002 skipped_reg 1307 errors 0 preevicted=26031 (7.7 s)
+[r39t torture] layers/pfad: PASS ops 30000 entries 168736 mismatches 0 scan 0 inv [] hits 148733 misses 20003 prefetched 12451 claimed 8728 dropped 1966 skipped_reg 1252 errors 0 pf_waits=12 (6.9 s)
+[r39t torture] layers/paced1: PASS ops 30000 entries 167772 mismatches 0 scan 0 inv [] hits 148471 misses 19301 prefetched 12545 claimed 8739 dropped 3801 skipped_reg 1083 errors 0 paced_demand_waits=0 paced_link_waits=0 (6.5 s)
+[r39t torture] layers/paced2: PASS ops 30000 entries 168230 mismatches 0 scan 0 inv [] hits 148815 misses 19415 prefetched 12375 claimed 8568 dropped 3795 skipped_reg 1103 errors 0 paced_demand_waits=0 paced_link_waits=0 (6.6 s)
+[r39t torture] layers/all: PASS ops 30000 entries 168666 mismatches 0 scan 0 inv [] hits 148746 misses 19920 prefetched 12655 claimed 8853 dropped 3800 skipped_reg 1148 errors 0 paced_demand_waits=0 paced_link_waits=0 pf_waits=0 preevicted=24611 (6.6 s)
+[r39t torture] layers/recommended: PASS ops 30000 entries 167663 mismatches 0 scan 0 inv [] hits 148302 misses 19361 prefetched 12747 claimed 8836 dropped 2027 skipped_reg 1302 errors 0  (7.5 s)
+[r39t torture] PASS -> <PKG_ROOT>\claude_r39_speed\out_r39s\pool_torture_r39t.json
+exit=0 15:31:17

@@ -1,0 +1,23 @@
+<PKG_ROOT>\claude_r39_qtip\build_r39\r39_stage2b_global_kl_trainer.py:44: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
+  --backbone-dir C:\models\GLM53-backbone-r34h \
+<PKG_ROOT>\claude_r39_qtip\build_r39\r39_stage2b_global_kl_trainer.py:44: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
+  --backbone-dir C:\models\GLM53-backbone-r34h \
+<PKG_ROOT>\claude_r39_qtip\build_r39\run_qtip_build_r39.py:40: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
+  --dst C:\models\GLM53-APEX-FOLD-R39-HYB \
+<PKG_ROOT>\claude_r39_qtip\build_r39\run_qtip_build_r39.py:40: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
+  --dst C:\models\GLM53-APEX-FOLD-R39-HYB \
+<PKG_ROOT>\claude_r39_qtip\runtime\glm53_fold_qtip_runtime.py:39: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
+  --backbone-dir C:\models\GLM53-backbone-r34h \
+<PKG_ROOT>\claude_r39_qtip\runtime\glm53_fold_qtip_runtime.py:39: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
+  --backbone-dir C:\models\GLM53-backbone-r34h \
+PASS GATE-1 [AST & Bytecode]                (0.52s): 39 Python files parsed & bytecode-compiled cleanly
+PASS GATE-2 [Slab Byte-Locks]               (0.00s): Rule A = 6,326,528 B | Rule GU125 = 6,064,384 B (both 16-byte aligned; -32,768 B/expert vs TCQ33)
+PASS GATE-3 [QTIP L=16 & HYB Math]          (53.51s): [OK] HYB L=16 V=2 k=2: bitpack EXACT, seam EXACT, held-out Gaussian SNR = 11.435 dB
+PASS GATE-4 [Stage-2B Finite-Diff Grads]    (1.33s): [PASS] Exact analytical gradients match central finite differences to < 1e-8 across x, router w, scale, and HYB LUT!
+PASS GATE-5 [Waterfill Prune Masks]         (0.11s): 5 non-uniform waterfill masks validated (hyb_GU125_69GB = 69.968 GB)
+PASS GATE-6 [Master Orchestrator Dry-Run]   (0.31s): Validated 5 profiles & master orchestrator --dry-run sequences
+PASS GATE-7 [OpenAI HTTP Server & KV Reuse] (1.82s): 9 passed, 0 failed, 4 skipped in 1.7s (runtime <PKG_ROOT>\claude_r39_qtip\runtime)
+PASS GATE-8 [R3.7 stable_messages Prefix]   (0.35s): test_serve_stable_r37: 4 passed, 0 failed
+FAIL GATE-9 [SHA-256 Manifest]             : AssertionError: SHA-256 mismatch on build_r39/r39_l27_qtip_2d_ldlq_lab.py: 21bd2723dbc70e373030cb7f1a4e28ecf8e48add4e77927ce34b363d539b94f4 != d1e1401dd865258f711b72c5f45d4801ce61c2d923dc048dc96915082cac1028
+
+[VERIFY FAILED] 1/9 gate(s) failed in 57.95s

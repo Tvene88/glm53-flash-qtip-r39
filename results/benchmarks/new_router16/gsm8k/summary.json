@@ -1,0 +1,52 @@
+{
+ "harness": "bench_r39-1.0",
+ "task": "gsm8k",
+ "model": "new",
+ "base_url": "http://127.0.0.1:8188/v1",
+ "written_utc": "2026-11-18T05:15:51Z",
+ "n_selected": 250,
+ "n_scored": 250,
+ "n_missing": 0,
+ "complete": true,
+ "n_correct": 240,
+ "score": 0.96,
+ "wilson95": [
+  0.92795,
+  0.97813
+ ],
+ "n_truncated": 0,
+ "n_truncated_but_otherwise_correct": 0,
+ "n_no_extractable_answer": 0,
+ "finish_reasons": {
+  "stop": 250
+ },
+ "mean_prompt_tokens": 132.46,
+ "mean_completion_tokens": 47.468,
+ "mean_wall_s": 4.124,
+ "mean_tok_s_wall": 11.227,
+ "mean_tok_s_reported": 23.815,
+ "total_completion_tokens": 11867,
+ "total_wall_s": 1031.04,
+ "aggregate_tok_s_wall": 11.51,
+ "request": {
+  "model": "new",
+  "max_tokens": 1024,
+  "temperature": 0.0,
+  "stream": false,
+  "chat_template_kwargs": {
+   "reasoning_effort": "low",
+   "enable_thinking": false
+  },
+  "cache_prompt": false
+ },
+ "exec_timeout_s": null,
+ "data": {
+  "data_file": "gsm8k_test.jsonl",
+  "data_sha256": "f99a71f3d1f0c0155e6d4a331ff0090260dbca5126b30b3ae6f4823657c0167a",
+  "ids_file": "gsm8k_sample_250.json",
+  "ids_sha256": "5690f69e9fcc59bc98c0588ae838382b19f7b0abf07125d6a67c9dea61a16190",
+  "n_items": 250
+ },
+ "prompt_template_sha256": "074fce8fc4eb1c8d1582da26641e82a70e223956fbcbfb5cd4a247737f924269",
+ "truncated_counts_as": "wrong"
+}
