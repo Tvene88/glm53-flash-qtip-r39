@@ -632,7 +632,11 @@ class GraphDecoder:
 
     def _seg_final(self, h):
         logits, _ = self.bb.final_logits(h, last_only=True)
-        nt = torch.argmax(logits[0, -1]).view(1)
+        smp = getattr(self.bb, "sampler", None)       # [R3.9SMP] temperature / top-p sampling; flag off = the argmax below
+        if smp is not None:
+            nt = smp.pick(logits[0, -1])
+        else:
+            nt = torch.argmax(logits[0, -1]).view(1)
         if self.bb.vocab_ids is not None:             # [R3.4-V] trimmed head: head row -> original token id (graph node)
             nt = self.bb.vocab_ids.index_select(0, nt)
         self.pos_t.add_(1)                            # [R3.4-2g] position advance inside the graph (was eager)
@@ -708,7 +712,11 @@ class GraphDecoder:
                     capture_hit(self, l, a['x'], a['w'], 1, 'n1', self._capture)
                 h = self._capture(f"b{l}", lambda l=l, a=a: self._seg_b(l, a))
                 self.out[f"b{l}"] = h
+        from glm53_fold_sampler_r39 import ensure_sampler, FinalReplay    # [R3.9SMP]
+        smp = ensure_sampler(self.bb, self.dev)       # before the capture: the final graph then contains the sampler
         nt, logits = self._capture("final", lambda h=h: self._seg_final(h))
+        if smp is not None:
+            self.graphs["final"] = FinalReplay(self.graphs["final"], smp)   # fresh uniforms before every replay
         self.next_tok, self.logits = nt, logits
         # [R3.4-2f] per-token replay order: (layer, first graph, p graph | None, b graph | None, next MoE layer | None)
         self._seq = [(l, f"a{l}", f"p{l}", f"b{l}", self.r.next_moe.get(l)) if l in moe else (l, f"d{l}", None, None, None)
@@ -792,10 +800,12 @@ class GraphDecoder:
         g["final"].replay()                           # [R3.4-2g] includes pos_t += 1
 
     @torch.no_grad()
-    def decode(self, first_tok: int, cache, max_new: int, eos_ids, on_token=None) -> Optional[List[int]]:
+    def decode(self, first_tok: int, cache, max_new: int, eos_ids, on_token=None, rewrite=None) -> Optional[List[int]]:
         """Greedy decode after an eager prefill; returns generated ids (excluding first_tok) or None if not usable.
         [R3.5-S1] on_token(tok) -> bool: called for every generated token (after it is appended); True stops decoding
-        (stop strings / client gone in the multi-turn server). None = the base loop, unchanged."""
+        (stop strings / client gone in the multi-turn server). None = the base loop, unchanged.
+        [R3.9SMP] rewrite(tok) -> tok: called before a token is committed; a different return value REPLACES the token
+        (it is appended, reported and fed to the next step: the thinking budget forces the end-of-thinking token)."""
         if not self.captured:
             self.capture()
         if not self.load_cache(cache):
@@ -818,6 +828,8 @@ class GraphDecoder:
                 self.step(tok)
             pos += 1
             tok = int(self.next_tok.item())
+            if rewrite is not None:                   # [R3.9SMP] thinking budget: may replace the token (fed next step)
+                tok = int(rewrite(tok))
             if prof:
                 self._r39t_collect()
             out_ids.append(tok)

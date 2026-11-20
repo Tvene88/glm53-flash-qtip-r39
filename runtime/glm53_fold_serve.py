@@ -26,8 +26,10 @@ Request handling
   * max_tokens / max_completion_tokens (capped to the context, noted), stop (string or list; matched in the text AFTER
     the reasoning block, the stop string is not returned), stream (SSE: incremental when the runner calls back per
     token, else sent at the end), stream_options.include_usage, n = 1 only, logprobs -> 400.
-  * SAMPLING IS GREEDY: the runtime has no sampler. temperature / top_p / top_k / seed / penalties / ... are accepted,
-    ignored and listed in the response (apex_fold.ignored_params, header X-Apex-Sampling: greedy).
+  * [R3.9SMP] SAMPLING: temperature / top_p / top_k / seed are honoured (glm53_fold_sampler_r39: top-64 candidates,
+    nucleus, Gumbel-max; temperature 0 = greedy, bit-identical to the old path). Defaults: --serve-temperature (0 =
+    greedy) / --serve-top-p / --serve-top-k. MTP serving stays greedy (its verify rule is greedy). Penalties, min_p,
+    logit_bias, ... are still accepted, ignored and listed (apex_fold.ignored_params; header X-Apex-Sampling).
   * Errors: OpenAI-style JSON {"error": {message, type, param, code}} with 400 / 401 / 404 / 411 / 413 / 500 / 503.
 
 Prompt construction = GLM-5.3's own chat_template.jinja rendered exactly like transformers' apply_chat_template (the
@@ -117,11 +119,12 @@ MARKUP_TOKENS = ("<think>", "</think>", "<tool_call>", "</tool_call>", "<arg_key
 EFFORT_ALIASES = {"low": "low", "minimal": "low", "medium": "high", "high": "high", "max": "max", "maximum": "max",
                   "xhigh": "max"}
 # accepted and ignored (reported back): the runtime decodes greedily, without logit processors
-IGNORED_PARAMS = ("temperature", "top_p", "top_k", "min_p", "typical_p", "seed", "presence_penalty", "frequency_penalty",
+IGNORED_PARAMS = ("min_p", "typical_p", "presence_penalty", "frequency_penalty",   # [R3.9SMP] temperature/top_p/top_k/seed honoured
                   "repetition_penalty", "logit_bias", "user", "metadata", "store", "service_tier", "prediction",
                   "modalities", "audio", "web_search_options", "safety_identifier", "prompt_cache_key", "verbosity",
                   "min_tokens", "ignore_eos", "best_of", "use_beam_search", "length_penalty")
 MAX_STOPS = 16
+THINK_GRACE = 256                     # [R3.9SMP] tokens past the thinking budget to wait for a line break
 
 
 def _now() -> float:
@@ -1104,6 +1107,10 @@ class GenerateRequest:
     # [R3.5-FIX serve-reuse-off-copies] False: the engine will not commit this request's state (reuse off for it), so
     # the runner makes no prompt-end snapshot and no final export (two full state copies per request, thrown away)
     store: bool = True
+    # [R3.9SMP] sampler settings {temperature, top_p, top_k, seed} (None = greedy: internal one-token generations)
+    sampling: Optional[Dict[str, Any]] = None
+    # [R3.9SMP] rewrite(tok) -> tok, called before each decoded token is committed (thinking budget); None = off
+    rewrite: Optional[Callable[[int], int]] = None
 
 
 @dataclass(eq=False)
@@ -1168,6 +1175,8 @@ class Prepared:
     t_received: float
     t_prepared: float
     stable_n: int = 0                 # [R3.7-STABLE] tokens of the client's stable prefix (0 = none given / not usable)
+    sampling: Optional[Dict[str, Any]] = None   # [R3.9SMP] {temperature, top_p, top_k, seed}
+    thinking_budget: int = 0                    # [R3.9SMP] reasoning tokens before </think> is forced (0 = off)
 
 
 STABLE_MARGIN = 4                     # [R3.7-STABLE] tokens cut from the common prefix (boundary tokenization)
@@ -1183,8 +1192,14 @@ class ServeEngine:
                  max_context: int = 16384, reuse: bool = True, cache_entries: int = 2, cache_points: int = 3,
                  cache_bytes: int = 1 << 30, min_reuse: int = 32, prefill_chunk: int = 0,
                  restore_reasoning: bool = False, queue_timeout: float = 600.0,
-                 log: Optional[Callable[[str], None]] = None):
+                 log: Optional[Callable[[str], None]] = None,
+                 default_sampling: Optional[Dict[str, Any]] = None, default_thinking_budget: int = 0):
         self.runner = runner
+        # [R3.9SMP] server-wide sampler defaults (a request's temperature / top_p / top_k / seed override them)
+        self.default_sampling: Dict[str, Any] = dict(default_sampling or {"temperature": 0.0})
+        # [R3.9SMP] thinking budget: after this many reasoning tokens the end-of-thinking token is forced at the next
+        # line break (at the latest THINK_GRACE tokens later). 0 = off. apex_fold.thinking_budget overrides per request.
+        self.default_thinking_budget = max(0, int(default_thinking_budget or 0))
         self.template = template
         self.model_id = model_id or getattr(runner, "model_id", DEFAULT_MODEL_ID)
         self.default_thinking = bool(default_thinking)
@@ -1212,7 +1227,8 @@ class ServeEngine:
     # ------------------------------------------------------------------ info
     def health(self) -> Dict[str, Any]:
         return {"status": "ok", "model": self.model_id, "busy": self.model_lock.locked(), "version": SERVE_VERSION,
-                "sampling": "greedy", "reuse": self.reuse and "reuse" in self.runner.capabilities,
+                "sampling": ("greedy" if not float(self.default_sampling.get("temperature") or 0) > 0
+                             else dict(self.default_sampling)), "reuse": self.reuse and "reuse" in self.runner.capabilities,
                 "capabilities": sorted(self.runner.capabilities), "uptime_s": round(time.time() - self.t_start, 1)}
 
     def models(self) -> Dict[str, Any]:
@@ -1250,6 +1266,12 @@ class ServeEngine:
         for k in IGNORED_PARAMS:
             if body.get(k) is not None:
                 ignored[k] = body[k]
+        from glm53_fold_sampler_r39 import parse_request_sampling        # [R3.9SMP]
+        try:
+            sampling = parse_request_sampling(body, self.default_sampling)
+        except ValueError as e:
+            raise RequestError(f"{e.args[0]} has an invalid value (temperature 0..5, top_p (0, 1], top_k >= 0, "
+                               "seed an integer)", param=str(e.args[0]))
         rf = body.get("response_format")
         if isinstance(rf, dict) and rf.get("type") not in (None, "text"):
             ignored["response_format"] = rf.get("type")
@@ -1312,6 +1334,13 @@ class ServeEngine:
         ext = body.get("apex_fold")
         if isinstance(ext, dict) and ext.get("reuse") is not None:
             reuse = _as_bool(ext["reuse"], "apex_fold.reuse")
+        thinking_budget = self.default_thinking_budget                      # [R3.9SMP]
+        if isinstance(ext, dict) and ext.get("thinking_budget") is not None:
+            tb = ext["thinking_budget"]
+            if isinstance(tb, bool) or not isinstance(tb, int) or tb < 0:
+                raise RequestError("apex_fold.thinking_budget must be a non-negative integer (0 = off)",
+                                   param="apex_fold.thinking_budget")
+            thinking_budget = int(tb)
         if self.restore_reasoning:
             self._inject_reasoning(messages, notes)
         tkw: Dict[str, Any] = {"reasoning_effort": effort}
@@ -1366,7 +1395,17 @@ class ServeEngine:
                         schemas=schemas, parse_tools=parse_tools, parallel_tool_calls=ptc, thinking=thinking,
                         effort=effort, clear_thinking=clear_thinking, text=text, ids=ids, max_tokens=max_tokens,
                         stops=stops, stream=stream, include_usage=include_usage, reuse=reuse, ignored=ignored,
-                        notes=notes, t_received=t0, t_prepared=_now(), stable_n=stable_n)
+                        notes=notes, t_received=t0, t_prepared=_now(), stable_n=stable_n, sampling=sampling,
+                        thinking_budget=thinking_budget if thinking else 0)
+
+    def _think_close_ids(self) -> List[int]:
+        """[R3.9SMP] token ids of "</think>" (cached; one id expected)."""
+        ids = getattr(self, "_close_ids_cache", None)
+        if ids is None:
+            with self.tok_lock:
+                ids = [int(i) for i in self.runner.encode(THINK_CLOSE)]
+            self._close_ids_cache = ids
+        return ids
 
     def _inject_reasoning(self, messages: List[dict], notes: List[str]) -> None:
         """--serve-restore-reasoning: an assistant message after the last user message (a tool loop) that comes back
@@ -1508,8 +1547,32 @@ class ServeEngine:
                 push(asm.feed(d))
             return asm.stopped or st["gone"]
 
+        # [R3.9SMP] thinking budget: count the decoded tokens while the reply is still in its reasoning block; past the
+        # budget, the next token that contains a line break (at the latest THINK_GRACE tokens later) is replaced by
+        # "</think>", which the decoder then feeds to the model: the answer follows from where the reasoning stopped.
+        tb = {"budget": int(prep.thinking_budget or 0), "n": 0, "forced_at": None}
+        rewrite = None
+        close_ids = self._think_close_ids() if tb["budget"] > 0 else []
+        if tb["budget"] > 0 and len(close_ids) == 1:
+            close_id = close_ids[0]
+
+            def rewrite(tok: int) -> int:
+                if tb["forced_at"] is not None or not asm.in_reasoning:
+                    return tok
+                tb["n"] += 1
+                if tb["n"] < tb["budget"] or tok == close_id:
+                    return tok
+                if tb["n"] >= tb["budget"] + THINK_GRACE or "\n" in self._decode_locked([int(tok)]):
+                    tb["forced_at"] = tb["n"]
+                    return close_id
+                return tok
+        elif tb["budget"] > 0:
+            prep.notes.append("thinking budget off: the tokenizer does not encode </think> as one token")
+
         req = GenerateRequest(prompt_ids=list(prep.ids), max_new_tokens=prep.max_tokens, plan=plan, on_token=on_token,
-                              store=use_reuse)                                 # [R3.5-FIX] no state copies without reuse
+                              store=use_reuse,                                 # [R3.5-FIX] no state copies without reuse
+                              sampling=prep.sampling,                          # [R3.9SMP]
+                              rewrite=rewrite)
         try:
             out = r.generate(req)
         except Exception:
@@ -1570,7 +1633,13 @@ class ServeEngine:
         self.counters["completion_tokens"] += len(gen)
         self.counters["prefilled_tokens"] += prefilled_req
         self.counters["cached_tokens"] += cached_req
-        info = {"sampling": "greedy", "ignored_params": prep.ignored, "notes": prep.notes, "thinking": prep.thinking,
+        if tb["forced_at"] is not None:
+            self.counters["thinking_budget_forced"] = self.counters.get("thinking_budget_forced", 0) + 1
+            self.log(f"[serve] [{SERVE_TAG}] {prep.cid[-8:]} thinking budget {tb['budget']}: </think> forced after "
+                     f"{tb['forced_at']} reasoning tokens")
+        info = {"sampling": (out.telemetry or {}).get("sampling", "greedy"),
+                "thinking_budget": {"budget": tb["budget"], "reasoning_tokens": tb["n"], "forced_at": tb["forced_at"]},
+                "ignored_params": prep.ignored, "notes": prep.notes, "thinking": prep.thinking,
                 "reasoning_effort": prep.effort,
                 "reuse": dict(plan.describe(), prefilled_tokens=prefilled_req, committed=committed is not None,
                               stop_reason=out.stop_reason, prefill_chunks=chunk_info, stable=stable_info),
@@ -1932,6 +2001,8 @@ class FakeRunner:
         while not stopped and gen[-1] not in self.eos_ids and len(gen) < req.max_new_tokens and len(gen) < len(out):
             hs = _fake_hash(hs, [gen[-1]])                    # feed the last generated token
             nxt = out[len(gen)]
+            if getattr(req, "rewrite", None) is not None:    # [R3.9SMP] the real decoders honour the same hook
+                nxt = int(req.rewrite(nxt))
             gen.append(nxt)
             if req.on_token and req.on_token(nxt):
                 stopped = True
@@ -2051,6 +2122,7 @@ class ServeState:
         self.graph_done = False
         self.t: Dict[str, float] = {}
         self.error: Optional[str] = None
+        self.rewrite = getattr(req, "rewrite", None)                       # [R3.9SMP] thinking budget hook (None = off)
         # [R3.5-INT] graph-path MTP: keep the layer-45 history complete (decode_mtp keep_history) and put a stored one
         # back (decode_mtp mtp_restore) - the "aligned" policy; drafts only, never an emitted token
         # [R3.5-FIX] (drafts only: no emitted token depends on it) not for a request whose state is not stored
@@ -2321,7 +2393,32 @@ class GLMRunnerAdapter:
                 "warnings": self.warnings}
 
     # ---- generation
+    def _apply_sampling(self, sampling: Optional[Dict[str, Any]]) -> Any:
+        """[R3.9SMP] write the request's sampler settings to the backbone's sampler (created on first use); MTP serving
+        stays greedy (its draft-verify rule compares against the argmax). Returns what the response reports."""
+        bb = getattr(self.r, "bb", None)
+        if bb is None:
+            return "greedy"
+        from glm53_fold_sampler_r39 import ensure_sampler
+        smp = ensure_sampler(bb, self.device if self.device is not None else "cuda")
+        if smp is None:
+            return "greedy (R39_SAMPLER=0)"
+        s = dict(sampling or {})
+        if self.use_mtp and float(s.get("temperature") or 0) > 0:
+            smp.set(0.0)
+            return "greedy (MTP serving decodes greedily)"
+        return smp.set(s.get("temperature"), s.get("top_p"), s.get("top_k"), s.get("seed"))
+
     def generate(self, req: GenerateRequest) -> GenerateOutcome:
+        smp_info = self._apply_sampling(getattr(req, "sampling", None))   # [R3.9SMP]
+        out = self._generate(req)
+        try:
+            out.telemetry = dict(out.telemetry or {}, sampling=smp_info)
+        except Exception:                                                  # pragma: no cover
+            pass
+        return out
+
+    def _generate(self, req: GenerateRequest) -> GenerateOutcome:
         P = [int(t) for t in req.prompt_ids]
         if not self.hooked:
             res = self.r.generate(P, max_new_tokens=int(req.max_new_tokens), eos_ids=set(self.eos_ids),
@@ -2577,6 +2674,14 @@ def add_serve_args(ap: argparse.ArgumentParser) -> argparse.ArgumentParser:
                         "VRAM: see INTEGRATION_S.md H7)")
     g.add_argument("--serve-effort", default="low", choices=["low", "high", "max"],
                    help="default reasoning effort (the template's 'Reasoning Effort' line; encode_chat used low)")
+    # [R3.9SMP] sampler defaults (glm53_fold_sampler_r39); a request's temperature / top_p / top_k / seed override them
+    g.add_argument("--serve-temperature", type=float, default=0.0,
+                   help="default temperature (0 = greedy, bit-identical to the pre-R3.9SMP decode)")
+    g.add_argument("--serve-top-p", type=float, default=1.0, help="default nucleus cut (1 = off)")
+    g.add_argument("--serve-top-k", type=int, default=0, help="default top-k (0 = the sampler's 64 candidates)")
+    g.add_argument("--serve-thinking-budget", type=int, default=0,
+                   help="reasoning tokens after which </think> is forced at the next line break (0 = off; "
+                        "apex_fold.thinking_budget overrides per request)")
     g.add_argument("--serve-no-reuse", action="store_true", help="disable conversation-state reuse")
     g.add_argument("--serve-cache-entries", type=int, default=2, help="conversations kept for reuse")
     g.add_argument("--serve-cache-points", type=int, default=3, help="restore points kept per conversation")
@@ -2632,7 +2737,11 @@ def _engine_from_args(runner_adapter, template: ChatTemplate, args, model_id: st
                        min_reuse=int(getattr(args, "serve_min_reuse", 32)),
                        prefill_chunk=int(getattr(args, "serve_prefill_chunk", 0)),
                        restore_reasoning=bool(getattr(args, "serve_restore_reasoning", False)),
-                       queue_timeout=float(getattr(args, "serve_queue_timeout", 600.0)))
+                       queue_timeout=float(getattr(args, "serve_queue_timeout", 600.0)),
+                       default_sampling={"temperature": float(getattr(args, "serve_temperature", 0.0)),   # [R3.9SMP]
+                                         "top_p": float(getattr(args, "serve_top_p", 1.0)),
+                                         "top_k": int(getattr(args, "serve_top_k", 0))},
+                       default_thinking_budget=int(getattr(args, "serve_thinking_budget", 0)))
 
 
 def serve_main(runner, tok, args) -> None:

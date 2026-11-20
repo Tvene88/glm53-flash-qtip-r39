@@ -890,7 +890,8 @@ class ApexFoldMoEModelRunner:
         if skip_prefill:                                  # [R3.5-S1] H5: state after the whole prompt + its token known
             next_tok, h_last = int(serve_state.first_token), serve_state.h_last
         else:
-            next_tok = self.bb.argmax_token(logits[0, -1])   # [R3.4-V] mapped back to the token id with a trimmed head
+            # [R3.4-V] mapped back to the token id with a trimmed head; [R3.9SMP] sampled when the sampler is on
+            next_tok = self.bb.pick_token(logits[0, -1]) if not use_mtp else self.bb.argmax_token(logits[0, -1])
         gen_ids: List[int] = [next_tok]
         if not skip_prefill:
             h_last = h_collapsed[:, -1:, :]
@@ -942,8 +943,13 @@ class ApexFoldMoEModelRunner:
             if serve_state is None:
                 g_ids = self.graph_decoder.decode(next_tok, cache, max_new_tokens - 1, eos_ids)
             else:                                                          # [R3.5-S1] H3: per-token callback
-                g_ids = self.graph_decoder.decode(next_tok, cache, max_new_tokens - 1, eos_ids,
-                                                  on_token=serve_state.on_token)
+                _rw = getattr(serve_state, "rewrite", None)                # [R3.9SMP] thinking budget (None = off)
+                if _rw is None:
+                    g_ids = self.graph_decoder.decode(next_tok, cache, max_new_tokens - 1, eos_ids,
+                                                      on_token=serve_state.on_token)
+                else:
+                    g_ids = self.graph_decoder.decode(next_tok, cache, max_new_tokens - 1, eos_ids,
+                                                      on_token=serve_state.on_token, rewrite=_rw)
             if g_ids is not None:
                 gen_ids.extend(g_ids)
                 n_steps = max(1, len(g_ids))
@@ -993,7 +999,10 @@ class ApexFoldMoEModelRunner:
                 logits, h_collapsed = self.bb.forward(
                     cur_in, cache=cache, moe_fn=self.moe_dispatch, last_only=True, max_layers=self.max_layers
                 )
-                next_tok = self.bb.argmax_token(logits[0, -1])
+                next_tok = self.bb.pick_token(logits[0, -1]) if not mtp_enabled else self.bb.argmax_token(logits[0, -1])
+                _rw = getattr(serve_state, "rewrite", None) if serve_state is not None and not mtp_enabled else None
+                if _rw is not None:                                        # [R3.9SMP] thinking budget
+                    next_tok = int(_rw(next_tok))
                 gen_ids.append(next_tok)
                 if serve_state is not None:
                     serve_state.on_token(next_tok)                         # [R3.5-S1] H3

@@ -260,7 +260,10 @@ def test_normalize_and_errors():
                       "top_p": 0.9, "seed": 1, "response_format": {"type": "json_object"}, "tool_choice": "required",
                       "tools": [WEATHER]})
     check(p.max_tokens == 4000 - len(p.ids) and any("capped" in n for n in p.notes), "max_tokens capped with a note")
-    check(set(p.ignored) >= {"temperature", "top_p", "seed", "response_format", "tool_choice"}, f"ignored {p.ignored}")
+    check(set(p.ignored) >= {"response_format", "tool_choice"}, f"ignored {p.ignored}")
+    # [R3.9SMP] temperature / top_p / seed are no longer ignored: they are parsed into the request's sampling settings
+    check(not set(p.ignored) & {"temperature", "top_p", "seed"} and p.sampling.get("temperature") == 0.7
+          and p.sampling.get("top_p") == 0.9, f"sampling {p.sampling} ignored {p.ignored}")
     return "normalization + 13 error cases"
 
 
@@ -677,8 +680,9 @@ def test_http_round_trip():
         call = c1["message"]["tool_calls"][0]
         check(call["type"] == "function" and call["function"]["name"] == "get_weather" and
               json.loads(call["function"]["arguments"]) == {"city": "Paris", "days": 2}, f"tool call {call}")
-        check(r1["apex_fold"]["sampling"] == "greedy" and "temperature" in r1["apex_fold"]["ignored_params"],
-              "greedy stated")
+        # [R3.9SMP] the fake runner reports no sampler, so "greedy" is still stated; temperature is honoured, not ignored
+        check(r1["apex_fold"]["sampling"] == "greedy" and "temperature" not in r1["apex_fold"]["ignored_params"],
+              "greedy stated, temperature not ignored")
         msgs += [c1["message"], {"role": "tool", "tool_call_id": call["id"], "content": "{\"temp\": 20}"}]
         st, body, _ = _req(u, {"messages": msgs, "tools": [WEATHER]})
         r2 = json.loads(body)

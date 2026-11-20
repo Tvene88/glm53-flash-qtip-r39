@@ -150,6 +150,7 @@ fit to the measurements a generation-5 slot would give about 32 tok/s. That is a
 | `results/` | the reports and logs behind every number (see `results/README.md`) |
 | `docs/WORK_RECORD.md` | the full working record: every step, fix, measurement and negative result |
 | `docs/original_handoff/` | the original design documents, unverified, for reference |
+| `docs/SAMPLER.md` | the token sampler and thinking budget added on 2026-11-19: why, what changed, flags, tests, measurements |
 | `docs/history/` | a note of an earlier round that the code refers to |
 
 ## Quick start
@@ -189,12 +190,17 @@ python runtime\quality_eval_r39s.py --runner qtip --fold C:\models\GLM53-APEX-FO
 ```
 
 The first load of an archive writes the `.slab` sidecars (about 15 minutes); later loads took 66 to 77 seconds.
-Decoding is greedy; the runtime has no sampler.
+Decoding is greedy by default. Since 2026-11-19 the server also samples (`--serve-temperature`, `--serve-top-p`,
+`--serve-top-k`, per-request `temperature` / `top_p` / `top_k` / `seed`) and can cap the thinking block
+(`--serve-thinking-budget`); see [`docs/SAMPLER.md`](docs/SAMPLER.md). For agent work with thinking on, use
+`--serve-temperature 1.0 --serve-top-p 0.95 --serve-thinking-budget 6144`: greedy decoding there can fail to end
+its thinking or fall into repetition. Every benchmark and speed figure here was measured greedy.
 
 ## Limitations
 
 - Custom runtime on Windows. The archive format is not GGUF, not safetensors, and is read by nothing but `runtime/`.
-- One request at a time, greedy decoding only.
+- One request at a time. The MTP (speculative) paths decode greedily only. The sampler was added after the
+  benchmarks, which were all run greedy (`docs/SAMPLER.md`).
 - The two benchmarks are small (164 and 250 items) and both models score near the ceiling on them; "statistically
   level" means the differences are inside the noise of these tests, not that the models are equal.
 - On the project's private KL measurement this archive is below the previously shipped TCQ33P5 archive

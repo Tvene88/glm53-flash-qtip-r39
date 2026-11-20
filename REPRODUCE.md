@@ -373,8 +373,11 @@ Set-Location "$REPO\runtime"
     --serve-max-context 65536 --serve-max-tokens 4096 --serve-state-gib 5 --serve-cache-entries 1 --serve-cache-points 2
 ```
 
-Endpoint: `http://127.0.0.1:8188/v1/chat/completions` (OpenAI-compatible, greedy; `temperature`, `top_p` and `seed`
-are accepted and ignored). Add `--vocab-keep "$REPO\configs\r34_vocab_keep.json"` for the restricted output head of
+Endpoint: `http://127.0.0.1:8188/v1/chat/completions` (OpenAI-compatible). The command above decodes greedily, as
+in every measurement here. For sampling and a thinking cap (agent use with thinking on) add
+`--serve-temperature 1.0 --serve-top-p 0.95 --serve-thinking-budget 6144`; requests may then set `temperature`,
+`top_p`, `top_k`, `seed` and `apex_fold.thinking_budget` (`docs/SAMPLER.md`).
+Add `--vocab-keep "$REPO\configs\r34_vocab_keep.json"` for the restricted output head of
 the benchmark runs; without it the full head is used (a served run with the full head is not in the record).
 
 What was and was not measured for this configuration: 40 HumanEval and 40 GSM8K requests at pool 17 GiB with the

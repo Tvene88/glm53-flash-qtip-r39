@@ -586,6 +586,18 @@ class RealGLM53Backbone:
             return int(torch.argmax(logits_row).item())
         return int(self.vocab_ids[torch.argmax(logits_row)].item())
 
+    def pick_token(self, logits_row: torch.Tensor) -> int:
+        """[R3.9SMP] Token id of one logits row under the current sampler settings (glm53_fold_sampler_r39): the greedy
+        argmax_token while the sampler is off or absent, otherwise one temperature / top-p draw."""
+        smp = getattr(self, "sampler", None)
+        if smp is None or not smp.active:
+            return self.argmax_token(logits_row)
+        if logits_row.device != smp.dev:
+            logits_row = logits_row.to(smp.dev)
+        smp.refresh()
+        idx = smp.pick(logits_row)
+        return int(idx.item()) if self.vocab_ids is None else int(self.vocab_ids.index_select(0, idx.to(self.vocab_ids.device)).item())
+
     def expand_logits(self, logits: torch.Tensor, fill: float = float("-inf")) -> torch.Tensor:
         """[R3.4-V] trimmed logits [..., K] -> full-vocabulary [..., V] with `fill` in the dropped rows (identity on a
         full head)."""
