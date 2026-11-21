@@ -1,9 +1,44 @@
 # GLM-5.3-Flash APEX-FOLD, Round 3.9 (QTIP HYB W16)
 
-**GLM-5.3-Flash (320B) on one RTX 5090: about 1.7-1.8x the decode speed of the most-downloaded 2-bit GGUF build,
-with expert weights about two-thirds its size, and statistically level HumanEval and GSM8K scores.**
+**APEX-FOLD is a compression and execution method developed in this project for running a mixture-of-experts model
+that is far larger than the GPU. It codes every routed expert into a fixed-size 2-bit trellis record that is built to
+stream over PCIe, and it computes each expert on the GPU directly from that code. Applied to GLM-5.3-Flash (320B), it
+runs on one RTX 5090 at about 1.7-1.8x the decode speed of the most-downloaded 2-bit GGUF build, from expert weights
+about two-thirds its size, with statistically level HumanEval and GSM8K scores.**
 
-Conditions and caveats of that sentence:
+## What is new
+
+A 2-bit build of a 320B MoE model does not fit in 32 GiB of VRAM. The usual answers are to keep every weight on the
+GPU (which needs more memory than one card has) or to keep the experts in system RAM and compute them on the CPU (llama.cpp offload).
+APEX-FOLD does neither. It starts from the real bottleneck of a single-GPU workstation, the host-to-GPU link, and
+designs both the compressed format and the runtime around it:
+
+1. **Trellis-coded experts in a streaming layout.** Each routed expert row gets a seeded random rotation (Rademacher
+   signs and a Kronecker-Hadamard transform) and is then coded at 2.0112 bits per weight with a 65,536-state bitshift
+   trellis (QTIP's HYB code, value pairs in 16x16 tiles). Its path is chosen with calibration Hessians (block LDLQ).
+   Every expert comes out as one byte-locked record of 6,326,528 bytes, stored in popularity order. Any expert can
+   therefore be fetched, cached or evicted with one contiguous copy.
+2. **Pruning, then router repair.** A non-uniform per-layer mask ("W16") removes 1,922 of the 12,096 trunk experts.
+   The MTP layer is never pruned. Only the router (the full gate matrices, 0.1 GB) is then retrained by distillation
+   against the FP8 model, instead of fine-tuning the experts.
+3. **Execution from the code, across memory tiers.** The most-used expert rows stay page-locked in host RAM (about
+   60 GiB) for direct DMA. A VRAM expert pool of 14-18 GiB is filled by demand streaming and prefetch and emptied by
+   cost-aware (GDSF) eviction. The CUDA kernels decode the trellis code inside the matrix-vector product, reading
+   straight from the pool slots. Experts therefore cross the PCIe bus and sit in VRAM at about 2 bits per weight, and
+   no 16-bit copy of an expert is ever built.
+4. **Exactness as an engineering rule.** Each speed change (the production-runtime port, kernel v2, the copy-traffic
+   changes) was accepted only after it reproduced the reference logits bit for bit (384 of 384).
+
+**What it builds on.** The trellis and the HYB code come from QTIP (Tseng et al., 2024). The incoherence rotation
+comes from QuIP#, the Hessian-aware rounding from LDLQ / GPTQ, the hash construction from ExLlamaV3, and the eviction
+policy is GDSF. The new part is how they are combined and executed: a trellis-coded, prune-masked, router-repaired
+expert archive with a fixed record layout for PCIe streaming, plus a runtime that serves it from one consumer GPU
+with the experts still compressed in VRAM. Earlier rounds of the project (TCQ33, a 4,096-state trellis with trained
+tables and sparse outlier slots) are documented in `docs/WORK_RECORD.md` and in the whitepaper.
+
+## The headline numbers and their conditions
+
+Conditions and caveats of the headline:
 
 - **The comparison.** `unsloth/GLM-5.3-Flash-GGUF`, variant `UD-IQ2_XXS` (101.8 GB), on the same machine through the
   same benchmark harness (`bench/`). That build keeps all experts and ran under llama.cpp with about 27 GiB on the
@@ -36,7 +71,7 @@ Every number in this repository is copied from the working record (`docs/WORK_RE
 tables, with the report or log file behind each number, are in [`RESULTS.md`](RESULTS.md). Commands are in
 [`REPRODUCE.md`](REPRODUCE.md).
 
-## What this is
+## What this repository contains
 
 A single-GPU inference runtime and compression pipeline for the GLM-5.3-Flash mixture-of-experts language model
 (320B parameters, 42 routed MoE layers plus one MTP layer, 288 routed experts per layer, 8 used per token).
