@@ -1,5 +1,7 @@
 # GLM-5.3-Flash APEX-FOLD, Round 3.9 (QTIP HYB W16)
 
+> **In one line:** [QTIP](https://arxiv.org/abs/2406.11235) showed that trellis-coded 2-bit weights run fast when the model fits in GPU memory. APEX-FOLD makes them run fast when it doesn't: the routed experts live in system RAM (most of them pinned), stream over PCIe, and run on the GPU straight from their compressed code.
+
 **APEX-FOLD is a compression and execution method developed in this project for running a mixture-of-experts model
 that is far larger than the GPU. It codes every routed expert into a fixed-size 2-bit trellis record that is built to
 stream over PCIe, and it computes each expert on the GPU directly from that code. Applied to GLM-5.3-Flash (320B), it
